@@ -38,12 +38,11 @@ public class UserController {
         this.userConfirmationService = userConfirmationService;
     }
 
-    @GetMapping("/user/test")
-    public ResponseEntity<ResultService<String>> test(){
-        User user = new User(UUID.fromString("a5722518-9fae-4972-a135-a8878981d057"), "augusto", "augustocesarsantana53@gmail.com\n",null, null,null);
-        var result = sendEmailUser.sendEmail(user);
-        return ResponseEntity.ok(ResultService.Ok(result.Message));
-    }
+//    @GetMapping("/public/user/getUsers/{email}")
+//    public ResponseEntity<ResultService<UserDTO>> getUsers(@PathVariable String email){
+//        var result = userManagementService.getUsers(email);
+//        return ResponseEntity.ok(result);
+//    }
 
     @GetMapping("/public/user/login/{cpfOrEmail}/{password}")
     public ResponseEntity<ResultService<UserDTO>> login(@PathVariable String cpfOrEmail, @PathVariable String password){

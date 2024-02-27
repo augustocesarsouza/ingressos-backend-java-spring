@@ -27,9 +27,11 @@ public class UserPermissionRepository implements IUserPermissionRepository {
 
         List<UserPermission> userPermissionList = new ArrayList<>();
 
-        listObj.forEach((obj) -> {
-            Permission permission = new Permission(null, (String) obj[2], (String) obj[3]);
-            UserPermission userPermission = new UserPermission((UUID) obj[0], (UUID) obj[1], null, permission);
+        listObj.forEach((listObjInner) -> {
+            Permission permission =
+                    new Permission(null, (String) listObjInner[2], (String) listObjInner[3]);
+            UserPermission userPermission = new UserPermission(
+                    (UUID) listObjInner[0], (UUID) listObjInner[1], null, permission);
             userPermissionList.add(userPermission);
         });
 

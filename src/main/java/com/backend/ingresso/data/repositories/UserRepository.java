@@ -6,6 +6,7 @@ import com.backend.ingresso.domain.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Component
@@ -37,7 +38,8 @@ public class UserRepository implements IUserRepository {
         }
 
         String[] stringSplit = query.split(",");
-        return new User(UUID.fromString(stringSplit[0]), stringSplit[1], stringSplit[2], stringSplit[3], stringSplit[4], null);
+        return new User(UUID.fromString(stringSplit[0]), stringSplit[1],
+                stringSplit[2], stringSplit[3], stringSplit[4], null);
     }
 
     @Override
@@ -55,7 +57,7 @@ public class UserRepository implements IUserRepository {
     @Override
     public User getByIdOnlyEmailOrCpfId(UUID guidId) {
         String query = userRepositoryJPA.getByIdOnlyEmailOrCpfId(guidId);
-
+        //@Query("SELECT u.Id, u.Email, u.Cpf FROM User AS u WHERE u.Id = :userId")
         if(query == null){
             return null;
         }
@@ -67,7 +69,7 @@ public class UserRepository implements IUserRepository {
     @Override
     public User getUserByIdInfoEmailPasswordHash(UUID guidId) {
         String query = userRepositoryJPA.getUserByIdInfoEmailPasswordHash(guidId);
-
+        //@Query("SELECT u.Email, u.PasswordHash FROM User AS u WHERE u.Id = :userId")
         if(query == null){
             return null;
         }
@@ -79,7 +81,7 @@ public class UserRepository implements IUserRepository {
     @Override
     public User getUserByIdCheckUserExists(UUID guidId) {
         String query = userRepositoryJPA.getUserByIdCheckUserExists(guidId);
-
+        //@Query("SELECT u.Id, u.ConfirmEmail FROM User AS u WHERE u.Id = :userId")
         if(query == null){
             return null;
         }
@@ -91,7 +93,7 @@ public class UserRepository implements IUserRepository {
     @Override
     public User getUserByEmailInfoEmailPasswordHash(String email) {
         String query = userRepositoryJPA.getUserByEmailInfoEmailPasswordHash(email);
-
+        //@Query("SELECT u.Id, u.Email, u.PasswordHash FROM User AS u WHERE u.Email = :email")
         if(query == null){
             return null;
         }
@@ -104,7 +106,7 @@ public class UserRepository implements IUserRepository {
     @Override
     public User getByUserIdOnlyPasswordHash(UUID userId) {
         String query = userRepositoryJPA.getByUserIdOnlyPasswordHash(userId);
-
+        //@Query("SELECT u.PasswordHash FROM User AS u WHERE u.Id = :userId")
         if(query == null){
             return null;
         }
@@ -115,11 +117,16 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public User create(User user) {
+        if(user == null)
+            return null;
         return userRepositoryJPA.save(user);
     }
 
     @Override
     public User update(User user) {
+        if(user == null)
+            return null;
+
         User userToUpdate = userRepositoryJPA.findById(user.getId()).orElse(null);
 
         if(userToUpdate == null)
