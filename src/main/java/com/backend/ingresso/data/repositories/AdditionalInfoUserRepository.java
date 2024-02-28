@@ -8,6 +8,10 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -21,7 +25,7 @@ public class AdditionalInfoUserRepository implements IAdditionalInfoUserReposito
     }
 
     @Override
-    public AdditionalInfoUser getInfoUser(UUID idGuid) {
+    public AdditionalInfoUser getInfoUser(UUID idGuid) throws ParseException {
         String query = additionalInfoUserRepositoryJPA.getInfoUser(idGuid);
 
         if(query == null){
@@ -33,17 +37,20 @@ public class AdditionalInfoUserRepository implements IAdditionalInfoUserReposito
         String[] stringSplit = query.split(",");
 
         String birthDate = stringSplit[0]; //Testar esse birsth
+        Timestamp birthDateTimestamp;
 
-        System.out.println(birthDate);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date parsedDate = dateFormat.parse(birthDate);
+        Timestamp timestamp = new Timestamp(parsedDate.getTime());
 
-        return new AdditionalInfoUser(null, null, null, stringSplit[1], stringSplit[2], stringSplit[3],stringSplit[4], stringSplit[5],
+        return new AdditionalInfoUser(null, null, timestamp, stringSplit[1], stringSplit[2], stringSplit[3],stringSplit[4], stringSplit[5],
                 stringSplit[6], stringSplit[7], stringSplit[8], stringSplit[9], stringSplit[10]);
     }
 
     @Override
     public AdditionalInfoUser getByIdGuidUser(UUID idGuid) {
         String query = additionalInfoUserRepositoryJPA.getByIdGuidUser(idGuid);
-
+        //@Query("SELECT a.Id FROM AdditionalInfoUser AS a WHERE a.UserId = :idGuid")
         if(query == null){
             return null;
         }

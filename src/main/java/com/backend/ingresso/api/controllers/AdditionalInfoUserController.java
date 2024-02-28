@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+
 @Component
 @RestController
 @RequestMapping("/v1")
@@ -18,7 +20,7 @@ public class AdditionalInfoUserController {
         this.additionalInfoUserService = additionalInfoUserService;
     }
     @GetMapping("/info-user/{idGuid}")
-    public ResponseEntity<ResultService<AdditionalInfoUserDTO>> getInfoUser(@PathVariable String idGuid){
+    public ResponseEntity<ResultService<AdditionalInfoUserDTO>> getInfoUser(@PathVariable String idGuid) throws ParseException {
         var result = additionalInfoUserService.getInfoUser(idGuid);
 
         if(result.IsSuccess){

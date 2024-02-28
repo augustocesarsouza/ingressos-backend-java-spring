@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.UUID;
 import java.util.regex.Pattern;
@@ -43,13 +44,18 @@ public class AdditionalInfoUserService implements IAdditionalInfoUserService {
     }
 
     @Override
-    public ResultService<AdditionalInfoUserDTO> getInfoUser(String idGuid) {
-        var userInfo = additionalInfoUserRepository.getInfoUser(UUID.fromString(idGuid));
+    public ResultService<AdditionalInfoUserDTO> getInfoUser(String idGuid) throws ParseException {
+        try {
+            var userInfo = additionalInfoUserRepository.getInfoUser(UUID.fromString(idGuid));
 
-        if(userInfo == null)
-            return ResultService.Fail("Erro obj info user null");
+            if(userInfo == null)
+                return ResultService.Fail("Erro obj info user null");
 
-        return ResultService.Ok("ok");
+            return ResultService.Ok(additionalInfoUserMapper.additionalInfoUserToadditionalInfoUserDto(userInfo));
+        }catch (Exception ex){
+            return ResultService.Fail(ex.getMessage());
+        }
+       // return ResultService.Ok("ok");
     }
 
     @Override

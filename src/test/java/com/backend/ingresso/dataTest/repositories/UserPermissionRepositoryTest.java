@@ -1,10 +1,7 @@
 package com.backend.ingresso.dataTest.repositories;
 
 import com.backend.ingresso.data.context.UserPermissionRepositoryJPA;
-import com.backend.ingresso.data.context.UserRepositoryJPA;
 import com.backend.ingresso.data.repositories.UserPermissionRepository;
-import com.backend.ingresso.data.repositories.UserRepository;
-import com.backend.ingresso.domain.entities.User;
 import com.backend.ingresso.domain.entities.UserPermission;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
