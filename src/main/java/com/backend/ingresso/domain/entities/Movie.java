@@ -107,4 +107,19 @@ public class Movie {
     public String getStatusMovie() {
         return StatusMovie;
     }
+
+    public void setMovieUpdate(UUID id, String title, String description, String gender, String duration, Integer movieRating,
+                               String imgUrl, String publicId, String imgUrlBackground, String publicIdImgBackground, String statusMovie){
+        Id = id;
+        Title = title;
+        Description = description;
+        Gender = gender;
+        Duration = duration;
+        MovieRating = movieRating;
+        ImgUrl = imgUrl;
+        PublicId = publicId;
+        ImgUrlBackground = imgUrlBackground;
+        PublicIdImgBackground = publicIdImgBackground;
+        StatusMovie = statusMovie;
+    }
 }
