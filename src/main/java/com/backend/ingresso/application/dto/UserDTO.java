@@ -36,6 +36,14 @@ public class UserDTO {
         ConfirmEmail = confirmEmail;
     }
 
+    public UserDTO(UUID id, String name, String email, String cpf, String passwordHash) {
+        Id = id;
+        Name = name;
+        Email = email;
+        Cpf = cpf;
+        PasswordHash = passwordHash;
+    }
+
     public UserDTO() {
     }
 

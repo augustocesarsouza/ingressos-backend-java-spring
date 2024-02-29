@@ -3,6 +3,7 @@ package com.backend.ingresso.application.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.UUID;
 
@@ -45,6 +46,38 @@ public class MovieDTO {
         PublicIdImgBackground = publicIdImgBackground;
         StatusMovie = statusMovie;
     }
+
+    public MovieDTO(UUID id, String title, String description, String gender, String duration, Integer movieRating, String imgUrl, String imgUrlBackground) {
+        Id = id;
+        Title = title;
+        Description = description;
+        Gender = gender;
+        Duration = duration;
+        MovieRating = movieRating;
+        ImgUrl = imgUrl;
+        ImgUrlBackground = imgUrlBackground;
+    }
+
+    public MovieDTO(String title, String description, String gender, Integer movieRating) {
+        Title = title;
+        Description = description;
+        Gender = gender;
+        MovieRating = movieRating;
+    }
+
+    public void setDataForGetByRegionId(UUID id, String title, String imgUrl, Integer movieRating){
+        Id = id;
+        Title = title;
+        ImgUrl = imgUrl;
+        MovieRating = movieRating;
+    }
+
+    public MovieDTO(UUID id, String title) {
+        Id = id;
+        Title = title;
+    }
+
+    //m.Id, m.Title, m.ImgUrl, m.MovieRating
 
     public MovieDTO() {
     }

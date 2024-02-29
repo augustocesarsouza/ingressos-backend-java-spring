@@ -12,8 +12,15 @@ public class PermissionDTO {
     @JsonProperty("permissionName")
     private String PermissionName;
 
+    //    SELECT up.Id, up.UserId, ps.VisualName, ps.PermissionName
+
     public PermissionDTO(UUID id, String visualName, String permissionName) {
         Id = id;
+        VisualName = visualName;
+        PermissionName = permissionName;
+    }
+
+    public PermissionDTO(String visualName, String permissionName) {
         VisualName = visualName;
         PermissionName = permissionName;
     }

@@ -16,7 +16,6 @@ import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UserRepositoryTest {
-
     private UserRepository userRepository;
 
     @Mock

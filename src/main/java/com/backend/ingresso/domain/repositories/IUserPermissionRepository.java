@@ -1,5 +1,6 @@
 package com.backend.ingresso.domain.repositories;
 
+import com.backend.ingresso.application.dto.UserPermissionDTO;
 import com.backend.ingresso.domain.entities.UserPermission;
 
 import java.util.List;

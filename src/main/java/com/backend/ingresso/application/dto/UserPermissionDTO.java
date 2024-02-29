@@ -29,6 +29,12 @@ public class UserPermissionDTO {
         this.permissionDTO = permissionDTO;
     }
 
+    public UserPermissionDTO(UUID id, UUID userId, PermissionDTO permissionDTO) {
+        Id = id;
+        UserId = userId;
+        this.permissionDTO = permissionDTO;
+    }
+
     public UUID getId() {
         return Id;
     }

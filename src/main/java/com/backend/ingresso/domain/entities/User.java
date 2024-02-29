@@ -43,6 +43,16 @@ public class User implements UserDetails {
         ConfirmEmail = confirmEmail;
     }
 
+    public User(UUID id, String name, String email, String cpf, String passwordHash) {
+        Id = id;
+        Name = name;
+        Email = email;
+        Cpf = cpf;
+        PasswordHash = passwordHash;
+    }
+
+    //    u.Id, u.Name, u.Email, u.Cpf, u.PasswordHash
+
     public User() {
     }
 

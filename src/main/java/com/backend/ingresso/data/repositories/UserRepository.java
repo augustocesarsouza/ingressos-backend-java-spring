@@ -1,5 +1,6 @@
 package com.backend.ingresso.data.repositories;
 
+import com.backend.ingresso.application.dto.UserDTO;
 import com.backend.ingresso.data.context.UserRepositoryJPA;
 import com.backend.ingresso.domain.entities.User;
 import com.backend.ingresso.domain.repositories.IUserRepository;

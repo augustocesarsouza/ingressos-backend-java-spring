@@ -2,6 +2,7 @@ package com.backend.ingresso.api.controllers;
 
 import com.backend.ingresso.application.dto.TokenAlreadyVisualizedDTO;
 import com.backend.ingresso.application.dto.UserDTO;
+import com.backend.ingresso.application.dto.UserPermissionDTO;
 import com.backend.ingresso.application.dto.validations.userValidationDTOs.UserPasswordChangeDTO;
 import com.backend.ingresso.application.dto.validations.userValidationDTOs.UserCreateValidatorDTO;
 import com.backend.ingresso.application.dto.validations.userValidationDTOs.UserUpdateValidatorDTO;
@@ -11,6 +12,8 @@ import com.backend.ingresso.application.services.interfaces.IUserConfirmationSer
 import com.backend.ingresso.application.services.interfaces.IUserManagementService;
 import com.backend.ingresso.data.utilityExternal.Interface.ISendEmailUser;
 import com.backend.ingresso.domain.entities.User;
+import com.backend.ingresso.domain.repositories.IUserPermissionRepository;
+import com.backend.ingresso.domain.repositories.IUserRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +21,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -25,23 +29,25 @@ import java.util.UUID;
 @RequestMapping("/v1")
 public class UserController {
     private final IUserManagementService userManagementService;
+    private final IUserRepository userRepository;
     private final IUserAuthenticationService userAuthenticationService;
     private final ISendEmailUser sendEmailUser;
     private final IUserConfirmationService userConfirmationService;
 
     @Autowired
     public UserController(IUserManagementService userManagementService, IUserAuthenticationService userAuthenticationService, ISendEmailUser sendEmailUser,
-                          IUserConfirmationService userConfirmationService) {
+                          IUserConfirmationService userConfirmationService, IUserRepository userRepository) {
         this.userManagementService = userManagementService;
         this.userAuthenticationService = userAuthenticationService;
         this.sendEmailUser = sendEmailUser;
         this.userConfirmationService = userConfirmationService;
+        this.userRepository = userRepository;
     }
 
 //    @GetMapping("/public/user/getUsers/{email}")
 //    public ResponseEntity<ResultService<UserDTO>> getUsers(@PathVariable String email){
-//        var result = userManagementService.getUsers(email);
-//        return ResponseEntity.ok(result);
+//        var result = userRepository.getUserByEmailObj(email);
+//        return ResponseEntity.ok(ResultService.Ok(result));
 //    }
 
     @GetMapping("/public/user/login/{cpfOrEmail}/{password}")

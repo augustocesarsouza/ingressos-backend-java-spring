@@ -1,5 +1,6 @@
 package com.backend.ingresso.data.context;
 
+import com.backend.ingresso.application.dto.UserDTO;
 import com.backend.ingresso.domain.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,6 +19,11 @@ public interface UserRepositoryJPA extends JpaRepository<User, UUID> {
 
     @Query("SELECT u.Id, u.Name, u.Email, u.Cpf, u.PasswordHash FROM User AS u WHERE u.Email = :email")
     String getUserByEmail(String email);
+
+//    @Query("SELECT new com.backend.ingresso.application.dto.UserDTO" +
+//            "(u.Id, u.Name, u.Email, u.Cpf, u.PasswordHash) " +
+//            "FROM User AS u WHERE u.Email = :email")
+//    UserDTO getUserByEmailObj(String email);
 
     @Query("SELECT u.Id, u.Name, u.Email, u.Cpf, u.PasswordHash FROM User AS u WHERE u.Cpf = :cpf")
     String GetUserByCpf(String cpf);

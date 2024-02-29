@@ -1,4 +1,5 @@
 package com.backend.ingresso.data.context;
+import com.backend.ingresso.application.dto.UserPermissionDTO;
 
 import com.backend.ingresso.domain.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,4 +12,9 @@ public interface UserPermissionRepositoryJPA extends JpaRepository<User, UUID> {
     @Query("SELECT up.Id, up.UserId, ps.VisualName, ps.PermissionName FROM UserPermission AS up INNER JOIN Permission AS ps ON up.PermissionId = ps.Id WHERE up.UserId = :idUser")
     //@Query(value = queryPass, nativeQuery = true)
     List<Object[]> getAllPermissionUser(UUID idUser);
+
+//    @Query("SELECT new com.backend.ingresso.application.dto.UserPermissionDTO(up.Id, up.UserId, new com.backend.ingresso.application.dto.PermissionDTO(ps.VisualName, ps.PermissionName)) " +
+//            "FROM UserPermission AS up INNER JOIN Permission AS ps ON up.PermissionId = ps.Id WHERE up.UserId = :idUser")
+//        //@Query(value = queryPass, nativeQuery = true)
+//    List<UserPermissionDTO> getAllPermissionUserObj(UUID idUser);
 }

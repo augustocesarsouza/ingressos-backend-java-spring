@@ -1,5 +1,6 @@
 package com.backend.ingresso.data.repositories;
 
+import com.backend.ingresso.application.dto.UserPermissionDTO;
 import com.backend.ingresso.data.context.UserPermissionRepositoryJPA;
 import com.backend.ingresso.domain.entities.Permission;
 import com.backend.ingresso.domain.entities.UserPermission;

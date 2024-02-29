@@ -1,5 +1,6 @@
 package com.backend.ingresso.domain.repositories;
 
+import com.backend.ingresso.application.dto.UserDTO;
 import com.backend.ingresso.domain.entities.User;
 
 import java.util.UUID;
