@@ -8,4 +8,12 @@ public class ErrorValidation {
         Field = field;
         Message = message;
     }
+
+    public String getField() {
+        return Field;
+    }
+
+    public String getMessage() {
+        return Message;
+    }
 }

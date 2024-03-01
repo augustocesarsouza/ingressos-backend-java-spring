@@ -1,11 +1,9 @@
 package com.backend.ingresso.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -27,24 +25,27 @@ public class Movie {
     @Column(name = "duration")
     @JsonProperty("duration")
     private String Duration;
-    @Column(name = "movieRating")
+    @Column(name = "movie_rating")
     @JsonProperty("movieRating")
     private Integer MovieRating;
-    @Column(name = "imgUrl")
+    @Column(name = "img_url")
     @JsonProperty("imgUrl")
     private String ImgUrl;
-    @Column(name = "publicId")
+    @Column(name = "public_id")
     @JsonProperty("publicId")
     private String PublicId;
-    @Column(name = "imgUrlBackground")
+    @Column(name = "img_url_background")
     @JsonProperty("imgUrlBackground")
     private String ImgUrlBackground;
-    @Column(name = "publicIdImgBackground")
+    @Column(name = "public_id_img_background")
     @JsonProperty("publicIdImgBackground")
     private String PublicIdImgBackground;
-    @Column(name = "statusMovie")
+    @Column(name = "status_movie")
     @JsonProperty("statusMovie")
     private String StatusMovie;
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.REMOVE)
+    private List<MovieTheater> movieTheaters;
+    //O parâmetro mappedBy = "movie" especifica que a propriedade movie na classe MovieTheater é responsável por mapear essa relação.
 
     public Movie(UUID id, String title, String description, String gender, String duration, Integer movieRating,
                  String imgUrl, String publicId, String imgUrlBackground, String publicIdImgBackground, String statusMovie) {
@@ -108,6 +109,11 @@ public class Movie {
         return StatusMovie;
     }
 
+//    public List<MovieTheater> getMovieTheaters() {
+//        return movieTheaters;
+//    }
+
+
     public void setMovieUpdate(UUID id, String title, String description, String gender, String duration, Integer movieRating,
                                String imgUrl, String publicId, String imgUrlBackground, String publicIdImgBackground, String statusMovie){
         Id = id;
@@ -121,5 +127,28 @@ public class Movie {
         ImgUrlBackground = imgUrlBackground;
         PublicIdImgBackground = publicIdImgBackground;
         StatusMovie = statusMovie;
+    }
+
+    public void setDataForCreateMovie(UUID id, String title, String description, String gender, String duration,
+                                      Integer movieRating, String imgUrl, String publicId,
+                                      String imgUrlBackground, String publicIdImgBackground, String statusMovie){
+        Id = id;
+        Title = title;
+        Description = description;
+        Gender = gender;
+        Duration = duration;
+        MovieRating = movieRating;
+        ImgUrl = imgUrl;
+        PublicId = publicId;
+        ImgUrlBackground = imgUrlBackground;
+        PublicIdImgBackground = publicIdImgBackground;
+        StatusMovie = statusMovie;
+    }
+
+    public void setImgUpdate(String imgUrl, String publicId, String imgUrlBackground, String publicIdImgBackground){
+        ImgUrl = imgUrl;
+        PublicId = publicId;
+        ImgUrlBackground = imgUrlBackground;
+        PublicIdImgBackground = publicIdImgBackground;
     }
 }

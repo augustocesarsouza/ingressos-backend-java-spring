@@ -23,6 +23,10 @@ public class RegionDTO {
     public RegionDTO() {
     }
 
+    public RegionDTO(UUID id) {
+        Id = id;
+    }
+
     public UUID getId() {
         return Id;
     }
@@ -33,5 +37,17 @@ public class RegionDTO {
 
     public String getCity() {
         return City;
+    }
+
+    public void setId(UUID id) {
+        Id = id;
+    }
+
+    public void setState(String state) {
+        State = state;
+    }
+
+    public void setCity(String city) {
+        City = city;
     }
 }

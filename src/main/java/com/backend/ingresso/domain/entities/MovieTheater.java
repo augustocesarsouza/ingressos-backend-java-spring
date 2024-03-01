@@ -1,11 +1,9 @@
 package com.backend.ingresso.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -21,6 +19,9 @@ public class MovieTheater {
     @Column(name = "region_id")
     @JsonProperty("regionId")
     private UUID RegionId;
+    @ManyToOne
+    @JoinColumn(name = "movie_id", insertable = false, updatable = false)
+    private Movie movie;
 
     public MovieTheater(UUID id, UUID movieId, UUID regionId) {
         Id = id;
@@ -41,5 +42,9 @@ public class MovieTheater {
 
     public UUID getRegionId() {
         return RegionId;
+    }
+
+    public Movie getMovie() {
+        return movie;
     }
 }

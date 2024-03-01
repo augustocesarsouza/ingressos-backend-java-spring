@@ -1,7 +1,9 @@
 package com.backend.ingresso;
 
 import com.backend.ingresso.data.authentication.FilterToken;
+import com.cloudinary.Cloudinary;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -17,10 +19,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Configuration
 @EnableWebSecurity
 public class Configurations {
     private FilterToken filter;
+    @Value("${CLOUD-NAME}")
+    private String CLOUD_NAME;
+    @Value("${API-KEY}")
+    private String API_KEY;
+    @Value("${API-SECRET}")
+    private String API_SECRET;
 
     @Autowired
     public Configurations(FilterToken filter) {
@@ -56,5 +67,15 @@ public class Configurations {
     public PasswordEncoder passwordEncoder(){
 //        return NoOpPasswordEncoder.getInstance();
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public Cloudinary cloudinary(){
+        Map<String, String> config = new HashMap<>();
+        config.put("cloud_name", CLOUD_NAME);
+        config.put("api_key", API_KEY);
+        config.put("api_secret", API_SECRET);
+
+        return new Cloudinary(config);
     }
 }

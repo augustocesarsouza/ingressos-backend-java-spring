@@ -11,6 +11,7 @@ import com.backend.ingresso.application.mappings.MappingClassInterface.IAddition
 import com.backend.ingresso.application.mappings.MappingClassInterface.IUserMapper;
 import com.backend.ingresso.application.services.interfaces.IAdditionalInfoUserService;
 import com.backend.ingresso.application.services.interfaces.IUserManagementService;
+import com.backend.ingresso.application.util.ValidateUUID;
 import com.backend.ingresso.application.util.interfaces.IBCryptPasswordEncoderUtil;
 import com.backend.ingresso.data.utilityExternal.Interface.ISendEmailUser;
 import com.backend.ingresso.domain.InfoErrors.InfoErrors;
@@ -212,10 +213,11 @@ public class UserManagementService implements IUserManagementService {
 
             return ResultService.RequestError("error validate DTO", errors);
         }else {
-            String regex = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$";
-            Pattern pattern = Pattern.compile(regex);
+//            String regex = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$";
+//            Pattern pattern = Pattern.compile(regex);
+            boolean validateUUID = ValidateUUID.Validate(idGuid);
 
-            if(!pattern.matcher(idGuid).matches()){
+            if(!validateUUID){
                 List<ErrorValidation> errors = new ArrayList<>();
                 var errorValidation = new ErrorValidation("id", "invalid format id must be UUID");
                 errors.add(errorValidation);

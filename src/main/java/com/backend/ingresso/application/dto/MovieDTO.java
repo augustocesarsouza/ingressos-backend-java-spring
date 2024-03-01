@@ -21,6 +21,8 @@ public class MovieDTO {
     private String Duration;
     @JsonProperty("movieRating")
     private Integer MovieRating;
+    @JsonProperty("base64Img")
+    private String Base64Img;
     @JsonProperty("imgUrl")
     private String ImgUrl;
     @JsonProperty("publicId")
@@ -65,12 +67,37 @@ public class MovieDTO {
         MovieRating = movieRating;
     }
 
-    public void setDataForGetByRegionId(UUID id, String title, String imgUrl, Integer movieRating){
+    public MovieDTO(UUID id, String title, String imgUrl, Integer movieRating) {
         Id = id;
         Title = title;
         ImgUrl = imgUrl;
         MovieRating = movieRating;
     }
+
+    public MovieDTO(UUID id, String publicId, String publicIdImgBackground) {
+        Id = id;
+        PublicId = publicId;
+        PublicIdImgBackground = publicIdImgBackground;
+    }
+
+    public void setDataForCreateMovie(UUID id, String title, String description, String gender, String duration,
+                                      Integer movieRating, String base64Img, String imgUrl, String publicId,
+                                      String imgUrlBackground, String publicIdImgBackground, String statusMovie){
+        Id = id;
+        Title = title;
+        Description = description;
+        Gender = gender;
+        Duration = duration;
+        MovieRating = movieRating;
+        Base64Img = base64Img;
+        ImgUrl = imgUrl;
+        PublicId = publicId;
+        ImgUrlBackground = imgUrlBackground;
+        PublicIdImgBackground = publicIdImgBackground;
+        StatusMovie = statusMovie;
+    }
+
+    //m.Id, m.Title, m.ImgUrl, m.MovieRating
 
     public MovieDTO(UUID id, String title) {
         Id = id;

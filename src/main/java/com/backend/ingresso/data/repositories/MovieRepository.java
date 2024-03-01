@@ -5,10 +5,12 @@ import com.backend.ingresso.data.context.MovieRepositoryJPA;
 import com.backend.ingresso.domain.entities.Movie;
 import com.backend.ingresso.domain.repositories.IMovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.UUID;
 
+@Component
 public class MovieRepository implements IMovieRepository {
     private final MovieRepositoryJPA movieRepositoryJPA;
 
@@ -51,8 +53,8 @@ public class MovieRepository implements IMovieRepository {
     }
 
     @Override
-    public MovieDTO getByIdAllProps(UUID movieId) {
-        MovieDTO movie = movieRepositoryJPA.getMovieById_Info_All(movieId);
+    public MovieDTO getMovieByIdForDelete(UUID movieId) {
+        MovieDTO movie = movieRepositoryJPA.getMovieByIdForDelete(movieId);
         //testar
 
         if(movie == null){
@@ -77,12 +79,11 @@ public class MovieRepository implements IMovieRepository {
         if(movie == null)
             return null;
 
-
         return movieRepositoryJPA.save(movie);
     }
 
     @Override
-    public Movie update(Movie movie) {
+    public Movie updateImg(Movie movie) {
         if(movie == null)
             return null;
 
@@ -91,9 +92,11 @@ public class MovieRepository implements IMovieRepository {
         if(movieUpdate == null)
             return null;
 
-        movieUpdate.setMovieUpdate(movie.getId(), movie.getTitle(), movie.getDescription(), movie.getGender(),
-                movie.getDuration(), movie.getMovieRating(), movie.getImgUrl(), movie.getPublicId(),
-                movie.getImgUrlBackground(), movie.getPublicIdImgBackground(), movie.getStatusMovie());
+//        movieUpdate.setMovieUpdate(movie.getId(), movie.getTitle(), movie.getDescription(), movie.getGender(),
+//                movie.getDuration(), movie.getMovieRating(), movie.getImgUrl(), movie.getPublicId(),
+//                movie.getImgUrlBackground(), movie.getPublicIdImgBackground(), movie.getStatusMovie());
+        movieUpdate.setImgUpdate(movie.getImgUrl(), movie.getPublicId(),
+                movie.getImgUrlBackground(), movie.getPublicIdImgBackground());
 
         return movieRepositoryJPA.save(movieUpdate);
     }

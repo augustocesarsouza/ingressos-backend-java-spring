@@ -1,5 +1,6 @@
 package com.backend.ingresso;
 
+import com.backend.ingresso.applicationTest.userServiceTest.MovieServiceTest;
 import com.backend.ingresso.applicationTest.userServiceTest.UserAuthenticationServiceTest;
 import com.backend.ingresso.applicationTest.userServiceTest.UserConfirmationServiceTest;
 import com.backend.ingresso.applicationTest.userServiceTest.UserManagementServiceTest;
@@ -21,6 +22,6 @@ import org.junit.platform.suite.api.Suite;
         UserManagementServiceTest.class, DictionaryCodeTest.class, BCryptPasswordEncoderUtilTest.class,
         DictionaryCodeTest.class,TokenGeneratorTest.class, AdditionalInfoUserRepositoryTest.class,
         MovieRepositoryTest.class, UserPermissionRepositoryTest.class, UserRepositoryTest.class,
-        SendEmailBrevoTest.class,SendEmailUserTest.class, UserTest.class})
+        SendEmailBrevoTest.class,SendEmailUserTest.class, UserTest.class, MovieServiceTest.class})
 public class TestAllClass {
 }

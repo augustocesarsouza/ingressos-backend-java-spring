@@ -87,6 +87,16 @@ public class FilterToken extends OncePerRequestFilter {
                 response.setCharacterEncoding("UTF-8");
                 response.getWriter().write(jsonString);
                 return;
+            }catch (Exception ex){
+                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                var user = new ForbiddenError("acesso_negado", "Usuario não contem as devidas informações necessarias para acesso");
+                var objectMapper = new ObjectMapper();
+                var jsonString = objectMapper.writeValueAsString(ResultService.Fail(user));
+
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(jsonString);
+                return;
             }
         }else {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

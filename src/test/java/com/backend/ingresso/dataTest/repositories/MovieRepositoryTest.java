@@ -94,12 +94,12 @@ public class MovieRepositoryTest {
     }
 
     @Test
-    public void test_GetByIdAllProps_Exists() {
+    public void test_GetMovieByIdForDelete_Exists() {
         String movieId = "e69fdc49-527f-4150-a44f-f446565185e2";
 
-        when(movieRepositoryJPA.getMovieById_Info_All(any())).thenReturn(new MovieDTO());
+        when(movieRepositoryJPA.getMovieByIdForDelete(any())).thenReturn(new MovieDTO());
 
-        MovieDTO movieDTO = movieRepository.getByIdAllProps(UUID.fromString(movieId));
+        MovieDTO movieDTO = movieRepository.getMovieByIdForDelete(UUID.fromString(movieId));
 
         assertNotNull(movieDTO);
     }
@@ -108,9 +108,9 @@ public class MovieRepositoryTest {
     public void test_GetByIdAllProps_ReturnNull() {
         String movieId = "e69fdc49-527f-4150-a44f-f446565185e2";
 
-        when(movieRepositoryJPA.getMovieById_Info_All(any())).thenReturn(null);
+        when(movieRepositoryJPA.getMovieByIdForDelete(any())).thenReturn(null);
 
-        MovieDTO movieDTO = movieRepository.getByIdAllProps(UUID.fromString(movieId));
+        MovieDTO movieDTO = movieRepository.getMovieByIdForDelete(UUID.fromString(movieId));
 
         assertNull(movieDTO);
     }
@@ -161,26 +161,26 @@ public class MovieRepositoryTest {
 
     @Test
     public void test_Update_Successfully() {
-        Movie movie = new Movie(null, "Leão", "seilaseila",
-                null, null, null, null, null, null,
-                null, null);
+        Movie movie = new Movie(UUID.fromString("786a283b-ee9a-495e-9d7d-bd730dbf19d4"),
+                null, null,
+                null, null, null, "imgUrlSeila", "dsfvbdfbdfb",
+                "imgUrlBackgroundseila", "ojikj9uiiuo", null);
 
-        Movie movieUpdate = new Movie(null, "José23", "hahahseila",
-                null, null, null, null, null, null,
-                null, null);
+        Movie movieUpdate = new Movie(null, "seilatitle", "descricaoseila",
+                null, null, null, "seilaimgUrl", null,
+                null, null, null);
 
         when(movieRepositoryJPA.findById(any())).thenReturn(Optional.of(movieUpdate));
         when(movieRepositoryJPA.save(any())).thenReturn(movieUpdate);
 
-        Movie movieUpda = movieRepository.update(movie);
+        Movie movieUpda = movieRepository.updateImg(movie);
 
         assertNotNull(movieUpda);
-        assertEquals(movieUpdate.getTitle(), movie.getTitle());
     }
 
     @Test
     public void test_Update_ReturnNullUser() {
-        Movie movie = movieRepository.update(null);
+        Movie movie = movieRepository.updateImg(null);
 
         assertNull(movie);
     }
@@ -193,7 +193,7 @@ public class MovieRepositoryTest {
 
         when(movieRepositoryJPA.findById(any())).thenReturn(Optional.empty());
 
-        Movie movieUpdateNotFound = movieRepository.update(movie);
+        Movie movieUpdateNotFound = movieRepository.updateImg(movie);
 
         assertNull(movieUpdateNotFound);
     }
