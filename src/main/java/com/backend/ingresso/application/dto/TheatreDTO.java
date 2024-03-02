@@ -1,49 +1,34 @@
-package com.backend.ingresso.domain.entities;
+package com.backend.ingresso.application.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 import java.sql.Timestamp;
 import java.util.UUID;
 
-@Entity
-@Table(name = "tb_theatres", schema = "public")
-public class Theatre {
-    @Id
-    @Column(name = "theatre_id")
+public class TheatreDTO {
     @JsonProperty("id")
     private UUID Id;
-    @Column(name = "title")
     @JsonProperty("title")
     private String Title;
-    @Column(name = "description")
     @JsonProperty("description")
     private String Description;
-    @Column(name = "data")
     @JsonProperty("data")
     private Timestamp Data;
-    @Column(name = "location")
     @JsonProperty("location")
     private String Location;
-    @Column(name = "type_of_attraction")
     @JsonProperty("typeOfAttraction")
     private Integer TypeOfAttraction;
-    @Column(name = "category")
     @JsonProperty("category")
     private String Category;
-    @Column(name = "public_id")
     @JsonProperty("publicId")
     private String PublicId;
-    @Column(name = "img_url")
     @JsonProperty("imgUrl")
     private String ImgUrl;
 
-    public Theatre(UUID id, String title, String description, Timestamp data,
-                   String location, Integer typeOfAttraction, String category,
-                   String publicId, String imgUrl) {
+    public TheatreDTO(UUID id, String title, String description,
+                      Timestamp data, String location, Integer typeOfAttraction,
+                      String category, String publicId, String imgUrl) {
         Id = id;
         Title = title;
         Description = description;
