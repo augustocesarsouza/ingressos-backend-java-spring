@@ -1,7 +1,6 @@
 package com.backend.ingresso.application.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Column;
 
 import java.sql.Timestamp;
 import java.util.UUID;
