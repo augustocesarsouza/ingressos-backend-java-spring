@@ -12,6 +12,7 @@ import java.util.UUID;
 public interface IMovieService {
     ResultService<List<MovieDTO>> getAllMovieByRegionId(String region);
     ResultService<MovieDTO> getInfoMoviesById(UUID movieId);
+    ResultService<MovieDTO> getIdMovieByTitle(String title);
     ResultService<MovieDTO> getStatusMovie(String statusMovie);
     ResultService<MovieDTO> create(MovieCreateValidatorDTO movieCreateValidatorDTO, BindingResult result);
     ResultService<MovieDTO> deleteMovie(UUID movieId);

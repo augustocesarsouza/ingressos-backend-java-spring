@@ -1,4 +1,4 @@
-package com.backend.ingresso.applicationTest.userServiceTest;
+package com.backend.ingresso.applicationTest;
 
 import com.backend.ingresso.application.ErrorValidation;
 import com.backend.ingresso.application.dto.MovieDTO;

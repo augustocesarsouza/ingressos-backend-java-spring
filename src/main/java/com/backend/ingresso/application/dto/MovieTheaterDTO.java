@@ -18,6 +18,10 @@ public class MovieTheaterDTO {
         RegionId = regionId;
     }
 
+    public MovieTheaterDTO(UUID id) {
+        Id = id;
+    }
+
     public MovieTheaterDTO() {
     }
 
@@ -31,5 +35,9 @@ public class MovieTheaterDTO {
 
     public UUID getRegionId() {
         return RegionId;
+    }
+
+    public void setId(UUID id) {
+        Id = id;
     }
 }

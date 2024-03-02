@@ -70,6 +70,21 @@ public class MovieService implements IMovieService {
 
     @Override
     @Transactional
+    public ResultService<MovieDTO> getIdMovieByTitle(String title) {
+        try {
+            MovieDTO movie = movieRepository.getMovieByTitle(title);
+
+            if(movie == null)
+                return ResultService.Fail("movie not found");
+
+            return ResultService.Ok(movie);
+        }catch (Exception ex){
+            return ResultService.Fail(ex.getMessage());
+        }
+    }
+
+    @Override
+    @Transactional
     public ResultService<MovieDTO> getStatusMovie(String statusMovie) {
         try {
             MovieDTO movie = movieRepository.getStatusMovie(statusMovie);

@@ -75,6 +75,13 @@ public class MovieRepository implements IMovieRepository {
     }
 
     @Override
+    public MovieDTO getMovieByTitle(String title) {
+        MovieDTO movieDto = movieRepositoryJPA.getMovieByTitle(title);
+
+        return movieDto;
+    }
+
+    @Override
     public Movie create(Movie movie) {
         if(movie == null)
             return null;

@@ -80,6 +80,10 @@ public class MovieDTO {
         PublicIdImgBackground = publicIdImgBackground;
     }
 
+    public MovieDTO(UUID id) {
+        Id = id;
+    }
+
     public void setDataForCreateMovie(UUID id, String title, String description, String gender, String duration,
                                       Integer movieRating, String base64Img, String imgUrl, String publicId,
                                       String imgUrlBackground, String publicIdImgBackground, String statusMovie){

@@ -12,6 +12,7 @@ public interface IMovieRepository {
     public MovieDTO getStatusMovie(String statusMovie);
     public MovieDTO getMovieByIdForDelete(UUID movieId);
     public List<MovieDTO> getAllMovieByRegionId(UUID regionId);
+    MovieDTO getMovieByTitle(String title);
     public Movie create(Movie movie);
     public Movie updateImg(Movie movie);
     public Movie delete(UUID movieId);

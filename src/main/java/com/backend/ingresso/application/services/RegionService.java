@@ -48,4 +48,19 @@ public class RegionService implements IRegionService {
             return ResultService.Fail(ex.getMessage());
         }
     }
+
+    @Override
+    @Transactional
+    public ResultService<RegionDTO> getIdRegionByState(String state) {
+        try {
+            RegionDTO regionDTO = regionRepository.getIdByNameState(state);
+
+            if(regionDTO == null)
+                return ResultService.Fail("region not found");
+
+            return ResultService.Ok(regionDTO);
+        }catch (Exception ex){
+            return ResultService.Fail(ex.getMessage());
+        }
+    }
 }

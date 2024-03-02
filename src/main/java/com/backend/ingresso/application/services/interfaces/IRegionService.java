@@ -5,5 +5,6 @@ import com.backend.ingresso.application.services.ResultService;
 
 public interface IRegionService {
     ResultService<RegionDTO> getRegionIdByCityName(String city);
+    ResultService<RegionDTO> getIdRegionByState(String state);
     ResultService<RegionDTO> getIdByNameState(String state);
 }

@@ -1,10 +1,8 @@
 package com.backend.ingresso.api.controllers;
 
 import com.backend.ingresso.application.dto.MovieDTO;
-import com.backend.ingresso.application.dto.TokenAlreadyVisualizedDTO;
 import com.backend.ingresso.application.dto.validations.movieValidationDTOs.MovieCreateValidatorDTO;
 import com.backend.ingresso.application.dto.validations.movieValidationDTOs.MovieUpdateValidatorDTO;
-import com.backend.ingresso.application.dto.validations.userValidationDTOs.UserCreateValidatorDTO;
 import com.backend.ingresso.application.services.ResultService;
 import com.backend.ingresso.application.services.interfaces.IMovieService;
 import jakarta.validation.Valid;

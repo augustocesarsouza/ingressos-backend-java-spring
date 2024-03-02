@@ -27,4 +27,7 @@ public interface MovieRepositoryJPA extends JpaRepository<Movie, UUID> {
     @Query("SELECT new com.backend.ingresso.application.dto.MovieDTO(m.Id, m.Title, m.ImgUrl, m.MovieRating) " +
             "FROM Movie AS m INNER JOIN MovieTheater AS mt ON m.Id = mt.MovieId WHERE mt.RegionId = :regionId")
     List<MovieDTO> getMovieByRegionId_Info_All(UUID regionId);
+    @Query("SELECT new com.backend.ingresso.application.dto.MovieDTO(m.Id) FROM Movie AS m " +
+            "WHERE m.Title = :title")
+    MovieDTO getMovieByTitle(String title);
 }

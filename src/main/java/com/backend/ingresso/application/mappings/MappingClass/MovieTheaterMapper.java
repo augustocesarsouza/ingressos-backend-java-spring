@@ -4,7 +4,9 @@ import com.backend.ingresso.application.dto.MovieDTO;
 import com.backend.ingresso.application.dto.MovieTheaterDTO;
 import com.backend.ingresso.application.mappings.MappingClassInterface.IMovieTheaterMapper;
 import com.backend.ingresso.domain.entities.MovieTheater;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MovieTheaterMapper implements IMovieTheaterMapper {
     @Override
     public MovieTheaterDTO movieTheaterToMovieTheaterDto(MovieTheater movieTheater) {
