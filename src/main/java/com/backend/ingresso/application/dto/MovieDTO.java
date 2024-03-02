@@ -156,4 +156,8 @@ public class MovieDTO {
     public String getStatusMovie() {
         return StatusMovie;
     }
+
+    public void setId(UUID id) {
+        Id = id;
+    }
 }
