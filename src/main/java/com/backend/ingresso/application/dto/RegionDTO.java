@@ -2,6 +2,7 @@ package com.backend.ingresso.application.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.util.UUID;
 
@@ -9,8 +10,10 @@ import java.util.UUID;
 public class RegionDTO {
     @JsonProperty("id")
     private UUID Id;
+    @NotEmpty(message = "state should not be empty")
     @JsonProperty("state")
     private String State;
+    @NotEmpty(message = "city should not be empty")
     @JsonProperty("city")
     private String City;
 

@@ -4,6 +4,7 @@ import com.backend.ingresso.application.dto.MovieDTO;
 import com.backend.ingresso.application.dto.RegionDTO;
 import com.backend.ingresso.data.context.RegionRepositoryJPA;
 import com.backend.ingresso.data.repositories.RegionRepository;
+import com.backend.ingresso.domain.entities.Region;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -70,5 +71,34 @@ public class RegionRepositoryTest {
         RegionDTO regionDTO = regionRepository.getIdByNameState(state);
 
         assertNull(regionDTO);
+    }
+
+    @Test
+    public void test_Create_Exists() {
+        Region region = new Region(null, null, null);
+
+        when(regionRepositoryJPA.save(any())).thenReturn(new Region());
+
+        Region regionCreate = regionRepository.create(region);
+
+        assertNotNull(regionCreate);
+    }
+
+    @Test
+    public void test_Create_RegionIsNull() {
+        Region regionCreate = regionRepository.create(null);
+
+        assertNull(regionCreate);
+    }
+
+    @Test
+    public void test_Create_ReturnNullSave() {
+        Region region = new Region(null, null, null);
+
+        when(regionRepositoryJPA.save(any())).thenReturn(null);
+
+        Region regionCreate = regionRepository.create(region);
+
+        assertNull(regionCreate);
     }
 }
