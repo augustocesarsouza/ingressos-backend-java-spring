@@ -18,17 +18,13 @@ public class RegionRepository implements IRegionRepository {
     }
 
     @Override
-    public RegionDTO getRegionIdByCityName(String city) {
-        RegionDTO regionDTO = regionRepositoryJPA.getRegionIdByCityName(city);
-
-        return regionDTO;
+    public Region getRegionIdByCityName(String city) {
+        return regionRepositoryJPA.getRegionIdByCityName(city);
     }
 
     @Override
-    public RegionDTO getIdByNameState(String state) {
-        RegionDTO regionDTO = regionRepositoryJPA.getIdByNameState(state);
-
-        return regionDTO;
+    public Region getIdByNameState(String state) {
+        return regionRepositoryJPA.getIdByNameState(state);
     }
 
     @Override

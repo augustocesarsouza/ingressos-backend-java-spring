@@ -12,22 +12,35 @@ import java.util.UUID;
 
 @Repository
 public interface MovieRepositoryJPA extends JpaRepository<Movie, UUID> {
-    @Query("SELECT new com.backend.ingresso.application.dto.MovieDTO(m.Id, m.Title) FROM Movie AS m WHERE m.Id = :movieId")
-    //poderia usar "AND" e fazer "AND (:titleParam IS NULL OR m.title = :titleParam)" filtar mas poder se pesado tem que ter index
-    MovieDTO getMovieById_Info_Id_Title(UUID movieId);
-    @Query("SELECT new com.backend.ingresso.application.dto.MovieDTO(m.Id, m.Title, m.Description, m.Gender, m.Duration, m.MovieRating, m.ImgUrl, m.ImgUrlBackground) " +
+    //Movie(m.Id, m.Title, m.Description, m.Gender, m.Duration, m.MovieRating, m.ImgUrl, m.PublicId, m.ImgUrlBackground, m.PublicIdImgBackground, m.StatusMovie)
+    @Query("SELECT new com.backend.ingresso.domain.entities." +
+            "Movie(m.Id, m.Title, null, null, null, null, null, null, null, null, null) " +
             "FROM Movie AS m WHERE m.Id = :movieId")
-    MovieDTO getMovieById(UUID movieId);
-    @Query("SELECT new com.backend.ingresso.application.dto.MovieDTO(m.Id, m.Title, m.Description, m.Gender, m.MovieRating) " +
+    Movie getMovieById_Info_Id_Title(UUID movieId);
+
+    @Query("SELECT new com.backend.ingresso.domain.entities." +
+            "Movie(m.Id, m.Title, m.Description, m.Gender, m.Duration, m.MovieRating, m.ImgUrl, null, m.ImgUrlBackground, null, null) " +
+            "FROM Movie AS m WHERE m.Id = :movieId")
+    Movie getMovieById(UUID movieId);
+
+    @Query("SELECT new com.backend.ingresso.domain.entities." +
+            "Movie(m.Id, m.Title, m.Description, m.Gender, null, m.MovieRating, null, null, null, null, null) " +
             "FROM Movie AS m WHERE m.StatusMovie = :statusMovie")
-    MovieDTO getMovieByStatusMovie(String statusMovie);
-    @Query("SELECT new com.backend.ingresso.application.dto.MovieDTO(m.Id, m.PublicId, m.PublicIdImgBackground) FROM Movie AS m WHERE m.Id = :movieId")
-    MovieDTO getMovieByIdForDelete(UUID movieId);
-    //testar esse 'setDataForGetByRegionId' pode não funcionar
-    @Query("SELECT new com.backend.ingresso.application.dto.MovieDTO(m.Id, m.Title, m.ImgUrl, m.MovieRating) " +
+    Movie getMovieByStatusMovie(String statusMovie);
+
+    @Query("SELECT new com.backend.ingresso.domain.entities." +
+            "Movie(m.Id, null, null, null, null, null, null, m.PublicId, null, m.PublicIdImgBackground, null) " +
+            "FROM Movie AS m WHERE m.Id = :movieId")
+    Movie getMovieByIdForDelete(UUID movieId);
+
+    @Query("SELECT new com.backend.ingresso.application.dto." +
+            "MovieDTO(m.Id, m.Title, null, null, null, m.MovieRating, m.ImgUrl, null, null, null, null) " +
             "FROM Movie AS m INNER JOIN MovieTheater AS mt ON m.Id = mt.MovieId WHERE mt.RegionId = :regionId")
     List<MovieDTO> getMovieByRegionId_Info_All(UUID regionId);
-    @Query("SELECT new com.backend.ingresso.application.dto.MovieDTO(m.Id) FROM Movie AS m " +
+
+    @Query("SELECT new com.backend.ingresso.domain.entities." +
+            "Movie(m.Id, null, null, null, null, null, null, null, null, null, null) " +
+            "FROM Movie AS m " +
             "WHERE m.Title = :title")
-    MovieDTO getMovieByTitle(String title);
+    Movie getMovieByTitle(String title);
 }

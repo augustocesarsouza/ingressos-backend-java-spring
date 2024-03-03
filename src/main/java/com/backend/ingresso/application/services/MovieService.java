@@ -10,6 +10,7 @@ import com.backend.ingresso.application.services.interfaces.IMovieService;
 import com.backend.ingresso.application.services.interfaces.IRegionService;
 import com.backend.ingresso.application.util.ValidateUUID;
 import com.backend.ingresso.data.utilityExternal.Interface.ICloudinaryUti;
+import com.backend.ingresso.domain.entities.Movie;
 import com.backend.ingresso.domain.repositories.IMovieRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,12 +58,12 @@ public class MovieService implements IMovieService {
     @Transactional
     public ResultService<MovieDTO> getInfoMoviesById(UUID movieId) {
         try {
-            MovieDTO movieDTO = movieRepository.getInfoMoviesById(movieId);
+            Movie movie = movieRepository.getInfoMoviesById(movieId);
 
-            if(movieDTO == null)
+            if(movie == null)
                 return ResultService.Fail("error get info movies by id");
 
-            return ResultService.Ok(movieDTO);
+            return ResultService.Ok(movieMapper.movieToMovieDto(movie));
         }catch (Exception ex){
             return ResultService.Fail(ex.getMessage());
         }
@@ -72,12 +73,12 @@ public class MovieService implements IMovieService {
     @Transactional
     public ResultService<MovieDTO> getIdMovieByTitle(String title) {
         try {
-            MovieDTO movie = movieRepository.getMovieByTitle(title);
+            Movie movie = movieRepository.getMovieByTitle(title);
 
             if(movie == null)
                 return ResultService.Fail("movie not found");
 
-            return ResultService.Ok(movie);
+            return ResultService.Ok(movieMapper.movieToMovieDto(movie));
         }catch (Exception ex){
             return ResultService.Fail(ex.getMessage());
         }
@@ -87,12 +88,12 @@ public class MovieService implements IMovieService {
     @Transactional
     public ResultService<MovieDTO> getStatusMovie(String statusMovie) {
         try {
-            MovieDTO movie = movieRepository.getStatusMovie(statusMovie);
+            Movie movie = movieRepository.getStatusMovie(statusMovie);
 
             if(movie == null)
                 return ResultService.Fail("statusMovie not found");
 
-            return ResultService.Ok(movie);
+            return ResultService.Ok(movieMapper.movieToMovieDto(movie));
         }catch (Exception ex){
             return ResultService.Fail(ex.getMessage());
         }
@@ -159,7 +160,7 @@ public class MovieService implements IMovieService {
             var deleteMovie = movieRepository.delete(movieDelete.getId());
 
             if(deleteMovie == null)
-                return ResultService.Fail("error found when deleting image in repository");
+                return ResultService.Fail("error found when deleting movie in repository");
 
             return ResultService.Ok(movieMapper.movieToMovieDto(deleteMovie));
         }catch (Exception ex){

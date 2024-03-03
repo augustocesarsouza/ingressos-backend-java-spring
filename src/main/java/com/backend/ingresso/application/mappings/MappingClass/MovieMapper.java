@@ -7,6 +7,7 @@ import com.backend.ingresso.application.mappings.MappingClassInterface.IMovieMap
 import com.backend.ingresso.domain.entities.Movie;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.UUID;
 
 @Component

@@ -130,7 +130,7 @@ public class AdditionalInfoUserService implements IAdditionalInfoUserService {
                             additionalInfoUserCreateDTO.getComplemento(), additionalInfoUserCreateDTO.getReferencia(), additionalInfoUserCreateDTO.getBairro(),
                             additionalInfoUserCreateDTO.getEstado(), additionalInfoUserCreateDTO.getCidade(), additionalInfoUserCreateDTO.getUserId());
                 }else{
-                    return ResultService.Fail("erro data should be in this format dd/mm/AAA");
+                    return ResultService.Fail("error data should be in this format dd/mm/AAA");
                 }
             }else{
                 additionalInfoUser.addData(null, additionalInfoUserCreateDTO.getGender(), additionalInfoUserCreateDTO.getPhone(),

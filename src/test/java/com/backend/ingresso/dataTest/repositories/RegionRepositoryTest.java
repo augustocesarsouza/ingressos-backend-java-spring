@@ -33,11 +33,11 @@ public class RegionRepositoryTest {
     public void test_GetRegionIdByCityName_Exists() {
         String city = "city1";
 
-        when(regionRepositoryJPA.getRegionIdByCityName(any())).thenReturn(new RegionDTO());
+        when(regionRepositoryJPA.getRegionIdByCityName(any())).thenReturn(new Region());
 
-        RegionDTO regionDTO = regionRepository.getRegionIdByCityName(city);
+        Region region = regionRepository.getRegionIdByCityName(city);
 
-        assertNotNull(regionDTO);
+        assertNotNull(region);
     }
 
     @Test
@@ -46,20 +46,20 @@ public class RegionRepositoryTest {
 
         when(regionRepositoryJPA.getRegionIdByCityName(any())).thenReturn(null);
 
-        RegionDTO regionDTO = regionRepository.getRegionIdByCityName(city);
+        Region region = regionRepository.getRegionIdByCityName(city);
 
-        assertNull(regionDTO);
+        assertNull(region);
     }
 
     @Test
     public void test_GetIdByNameState_Exists() {
         String state = "state1";
 
-        when(regionRepositoryJPA.getIdByNameState(any())).thenReturn(new RegionDTO());
+        when(regionRepositoryJPA.getIdByNameState(any())).thenReturn(new Region());
 
-        RegionDTO regionDTO = regionRepository.getIdByNameState(state);
+        Region region = regionRepository.getIdByNameState(state);
 
-        assertNotNull(regionDTO);
+        assertNotNull(region);
     }
 
     @Test
@@ -68,9 +68,9 @@ public class RegionRepositoryTest {
 
         when(regionRepositoryJPA.getIdByNameState(any())).thenReturn(null);
 
-        RegionDTO regionDTO = regionRepository.getIdByNameState(state);
+        Region region = regionRepository.getIdByNameState(state);
 
-        assertNull(regionDTO);
+        assertNull(region);
     }
 
     @Test

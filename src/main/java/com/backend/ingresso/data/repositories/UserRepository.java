@@ -20,100 +20,48 @@ public class UserRepository implements IUserRepository {
     }
     @Override
     public User checkUserExits(String email, String cpf) {
-        String query = userRepositoryJPA.checkUserExits(email, cpf);
-
-        if(query == null){
-            return null;
-        }
-        // @Query("SELECT u.Id, u.Name FROM User AS u WHERE u.Email = :email AND u.Cpf = :cpf")
-        String[] stringSplit = query.split(",");
-        return new User(UUID.fromString(stringSplit[0]), stringSplit[1], null, null, null, null);
+        return userRepositoryJPA.checkUserExits(email, cpf);
     }
 
     @Override
     public User getUserByEmail(String email) {
-        String query = userRepositoryJPA.getUserByEmail(email);
-
-        if(query == null){
-            return null;
-        }
-
-        String[] stringSplit = query.split(",");
-        return new User(UUID.fromString(stringSplit[0]), stringSplit[1],
-                stringSplit[2], stringSplit[3], stringSplit[4], null);
+        return userRepositoryJPA.getUserByEmail(email);
     }
 
     @Override
     public User getUserByCpf(String cpf) {
-        String query = userRepositoryJPA.GetUserByCpf(cpf);
-
-        if(query == null){
-            return null;
-        }
-
-        String[] stringSplit = query.split(",");
-        return new User(UUID.fromString(stringSplit[0]), stringSplit[1], stringSplit[2], stringSplit[3], stringSplit[4], null);
+        return userRepositoryJPA.GetUserByCpf(cpf);
     }
 
     @Override
     public User getByIdOnlyEmailOrCpfId(UUID guidId) {
-        String query = userRepositoryJPA.getByIdOnlyEmailOrCpfId(guidId);
+        return userRepositoryJPA.getByIdOnlyEmailOrCpfId(guidId);
         //@Query("SELECT u.Id, u.Email, u.Cpf FROM User AS u WHERE u.Id = :userId")
-        if(query == null){
-            return null;
-        }
-
-        String[] stringSplit = query.split(",");
-        return new User(UUID.fromString(stringSplit[0]), null, stringSplit[1], stringSplit[2], null, null);
     }
 
     @Override
     public User getUserByIdInfoEmailPasswordHash(UUID guidId) {
-        String query = userRepositoryJPA.getUserByIdInfoEmailPasswordHash(guidId);
+        return userRepositoryJPA.getUserByIdInfoEmailPasswordHash(guidId);
         //@Query("SELECT u.Email, u.PasswordHash FROM User AS u WHERE u.Id = :userId")
-        if(query == null){
-            return null;
-        }
-
-        String[] stringSplit = query.split(",");
-        return new User(null, null, stringSplit[0], null, stringSplit[1], null);
     }
 
     @Override
     public User getUserByIdCheckUserExists(UUID guidId) {
-        String query = userRepositoryJPA.getUserByIdCheckUserExists(guidId);
+        return userRepositoryJPA.getUserByIdCheckUserExists(guidId);
         //@Query("SELECT u.Id, u.ConfirmEmail FROM User AS u WHERE u.Id = :userId")
-        if(query == null){
-            return null;
-        }
-
-        String[] stringSplit = query.split(",");
-        return new User(UUID.fromString(stringSplit[0]), null, null, null, null, Boolean.parseBoolean(stringSplit[1]));
     }
 
     @Override
     public User getUserByEmailInfoEmailPasswordHash(String email) {
-        String query = userRepositoryJPA.getUserByEmailInfoEmailPasswordHash(email);
+        return userRepositoryJPA.getUserByEmailInfoEmailPasswordHash(email);
         //@Query("SELECT u.Id, u.Email, u.PasswordHash FROM User AS u WHERE u.Email = :email")
-        if(query == null){
-            return null;
-        }
-
-        String[] stringSplit = query.split(",");
-        return new User(UUID.fromString(stringSplit[0]), null, stringSplit[1], null, stringSplit[2], null);
     }
 
 
     @Override
     public User getByUserIdOnlyPasswordHash(UUID userId) {
-        String query = userRepositoryJPA.getByUserIdOnlyPasswordHash(userId);
+        return userRepositoryJPA.getByUserIdOnlyPasswordHash(userId);
         //@Query("SELECT u.PasswordHash FROM User AS u WHERE u.Id = :userId")
-        if(query == null){
-            return null;
-        }
-
-        User user =  new User(null, null, null, null, query, null);
-        return user;
     }
 
     @Override

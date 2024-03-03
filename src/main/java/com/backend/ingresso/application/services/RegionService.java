@@ -33,12 +33,12 @@ public class RegionService implements IRegionService {
     @Transactional
     public ResultService<RegionDTO> getRegionIdByCityName(String city) {
         try {
-            RegionDTO regionDTO = regionRepository.getRegionIdByCityName(city);
+            Region regionDTO = regionRepository.getRegionIdByCityName(city);
 
             if(regionDTO == null)
                 return ResultService.Fail("not found region");
 
-            return ResultService.Ok(regionDTO);
+            return ResultService.Ok(regionMapper.regionToRegionDto(regionDTO));
         }catch (Exception ex){
             return ResultService.Fail(ex.getMessage());
         }
@@ -48,12 +48,12 @@ public class RegionService implements IRegionService {
     @Transactional
     public ResultService<RegionDTO> getIdByNameState(String state) {
         try {
-            RegionDTO regionDTO = regionRepository.getIdByNameState(state);
+            Region regionDTO = regionRepository.getIdByNameState(state);
 
             if(regionDTO == null)
                 return ResultService.Fail("not found region");
 
-            return ResultService.Ok(regionDTO);
+            return ResultService.Ok(regionMapper.regionToRegionDto(regionDTO));
         }catch (Exception ex){
             return ResultService.Fail(ex.getMessage());
         }
@@ -63,12 +63,12 @@ public class RegionService implements IRegionService {
     @Transactional
     public ResultService<RegionDTO> getIdRegionByState(String state) {
         try {
-            RegionDTO regionDTO = regionRepository.getIdByNameState(state);
+            Region regionDTO = regionRepository.getIdByNameState(state);
 
             if(regionDTO == null)
                 return ResultService.Fail("region not found");
 
-            return ResultService.Ok(regionDTO);
+            return ResultService.Ok(regionMapper.regionToRegionDto(regionDTO));
         }catch (Exception ex){
             return ResultService.Fail(ex.getMessage());
         }

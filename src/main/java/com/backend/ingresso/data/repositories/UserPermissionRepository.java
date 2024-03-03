@@ -21,21 +21,7 @@ public class UserPermissionRepository implements IUserPermissionRepository {
         this.userPermissionRepositoryJPA = userPermissionRepositoryJPA;
     }
     @Override
-    public List<UserPermission> getAllPermissionUser(UUID idUser) {
-        List<Object[]> listObj = userPermissionRepositoryJPA.getAllPermissionUser(idUser);
-        if(listObj == null)
-            return null;
-
-        List<UserPermission> userPermissionList = new ArrayList<>();
-
-        listObj.forEach((listObjInner) -> {
-            Permission permission =
-                    new Permission(null, (String) listObjInner[2], (String) listObjInner[3]);
-            UserPermission userPermission = new UserPermission(
-                    (UUID) listObjInner[0], (UUID) listObjInner[1], null, permission);
-            userPermissionList.add(userPermission);
-        });
-
-        return userPermissionList;
+    public List<UserPermissionDTO> getAllPermissionUser(UUID idUser) {
+        return userPermissionRepositoryJPA.getAllPermissionUser(idUser);
     }
 }

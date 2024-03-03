@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.UUID;
 
 public interface IUserPermissionRepository {
-    List<UserPermission> getAllPermissionUser(UUID idUser);
+    List<UserPermissionDTO> getAllPermissionUser(UUID idUser);
 }

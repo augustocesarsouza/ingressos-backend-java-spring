@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ICloudinaryUti {
     ResultService<CloudinaryCreate> CreateImg(String url, Integer width, Integer height);
-    public ResultService<String> deleteImg(List<String> publicList);
+    ResultService<String> deleteImg(List<String> publicList);
 }

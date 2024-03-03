@@ -35,11 +35,11 @@ public class MovieRepositoryTest {
     public void test_GetById_Exists() {
         String movieId = "e69fdc49-527f-4150-a44f-f446565185e2";
 
-        when(movieRepositoryJPA.getMovieById_Info_Id_Title(any())).thenReturn(new MovieDTO());
+        when(movieRepositoryJPA.getMovieById_Info_Id_Title(any())).thenReturn(new Movie());
 
-        MovieDTO movieDTO = movieRepository.getById(UUID.fromString(movieId));
+        Movie movie = movieRepository.getById(UUID.fromString(movieId));
 
-        assertNotNull(movieDTO);
+        assertNotNull(movie);
     }
 
     @Test
@@ -48,20 +48,20 @@ public class MovieRepositoryTest {
 
         when(movieRepositoryJPA.getMovieById_Info_Id_Title(any())).thenReturn(null);
 
-        MovieDTO movieDTO = movieRepository.getById(UUID.fromString(movieId));
+        Movie movie = movieRepository.getById(UUID.fromString(movieId));
 
-        assertNull(movieDTO);
+        assertNull(movie);
     }
 
     @Test
     public void test_GetInfoMoviesById_Exists() {
         String movieId = "e69fdc49-527f-4150-a44f-f446565185e2";
 
-        when(movieRepositoryJPA.getMovieById(any())).thenReturn(new MovieDTO());
+        when(movieRepositoryJPA.getMovieById(any())).thenReturn(new Movie());
 
-        MovieDTO movieDTO = movieRepository.getInfoMoviesById(UUID.fromString(movieId));
+        Movie movie = movieRepository.getInfoMoviesById(UUID.fromString(movieId));
 
-        assertNotNull(movieDTO);
+        assertNotNull(movie);
     }
 
     @Test
@@ -70,15 +70,15 @@ public class MovieRepositoryTest {
 
         when(movieRepositoryJPA.getMovieById(any())).thenReturn(null);
 
-        MovieDTO movieDTO = movieRepository.getInfoMoviesById(UUID.fromString(movieId));
+        Movie movie = movieRepository.getInfoMoviesById(UUID.fromString(movieId));
 
-        assertNull(movieDTO);
+        assertNull(movie);
     }
     @Test
     public void test_GetStatusMovie_Exists() {
-        when(movieRepositoryJPA.getMovieByStatusMovie(any())).thenReturn(new MovieDTO());
+        when(movieRepositoryJPA.getMovieByStatusMovie(any())).thenReturn(new Movie());
 
-        MovieDTO movie = movieRepository.getStatusMovie("seila");
+        Movie movie = movieRepository.getStatusMovie("seila");
 
         assertNotNull(movie);
 
@@ -88,7 +88,7 @@ public class MovieRepositoryTest {
     public void test_GetStatusMovie_ReturnNull_Query() {
         when(movieRepositoryJPA.getMovieByStatusMovie(any())).thenReturn(null);
 
-        MovieDTO movie = movieRepository.getStatusMovie("seila");
+        Movie movie = movieRepository.getStatusMovie("seila");
 
         assertNull(movie);
     }
@@ -97,11 +97,11 @@ public class MovieRepositoryTest {
     public void test_GetMovieByIdForDelete_Exists() {
         String movieId = "e69fdc49-527f-4150-a44f-f446565185e2";
 
-        when(movieRepositoryJPA.getMovieByIdForDelete(any())).thenReturn(new MovieDTO());
+        when(movieRepositoryJPA.getMovieByIdForDelete(any())).thenReturn(new Movie());
 
-        MovieDTO movieDTO = movieRepository.getMovieByIdForDelete(UUID.fromString(movieId));
+        Movie movie = movieRepository.getMovieByIdForDelete(UUID.fromString(movieId));
 
-        assertNotNull(movieDTO);
+        assertNotNull(movie);
     }
 
     @Test
@@ -110,9 +110,9 @@ public class MovieRepositoryTest {
 
         when(movieRepositoryJPA.getMovieByIdForDelete(any())).thenReturn(null);
 
-        MovieDTO movieDTO = movieRepository.getMovieByIdForDelete(UUID.fromString(movieId));
+        Movie movie = movieRepository.getMovieByIdForDelete(UUID.fromString(movieId));
 
-        assertNull(movieDTO);
+        assertNull(movie);
     }
 
     @Test

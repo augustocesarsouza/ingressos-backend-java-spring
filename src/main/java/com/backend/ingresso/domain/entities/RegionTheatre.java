@@ -14,29 +14,32 @@ public class RegionTheatre {
     private UUID Id;
     @Column(name = "theatre_id")
     @JsonProperty("theatreId")
-    private String TheatreId;
+    private UUID TheatreId;
     @Column(name = "region_id")
     @JsonProperty("regionId")
-    private String RegionId;
+    private UUID RegionId;
     @ManyToOne
     @JoinColumn(name = "theatre_id", insertable = false, updatable = false)
     private Theatre theatre;
 
-    public RegionTheatre(UUID id, String theatreId, String regionId) {
+    public RegionTheatre(UUID id, UUID theatreId, UUID regionId) {
         Id = id;
         TheatreId = theatreId;
         RegionId = regionId;
+    }
+
+    public RegionTheatre() {
     }
 
     public UUID getId() {
         return Id;
     }
 
-    public String getTheatreId() {
+    public UUID getTheatreId() {
         return TheatreId;
     }
 
-    public String getRegionId() {
+    public UUID getRegionId() {
         return RegionId;
     }
 }

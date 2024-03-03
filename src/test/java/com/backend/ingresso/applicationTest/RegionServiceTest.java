@@ -41,7 +41,7 @@ public class RegionServiceTest {
     public void should_GetRegionIdByCityName_WithoutErrors(){
         String city = "city1";
 
-        when(regionRepository.getRegionIdByCityName(any())).thenReturn(new RegionDTO());
+        when(regionRepository.getRegionIdByCityName(any())).thenReturn(new Region());
 
         // Act
         var result = regionService.getRegionIdByCityName(city);
@@ -68,7 +68,7 @@ public class RegionServiceTest {
     public void should_GetIdByNameState_WithoutErrors(){
         String state = "state1";
 
-        when(regionRepository.getIdByNameState(any())).thenReturn(new RegionDTO());
+        when(regionRepository.getIdByNameState(any())).thenReturn(new Region());
 
         // Act
         var result = regionService.getIdByNameState(state);

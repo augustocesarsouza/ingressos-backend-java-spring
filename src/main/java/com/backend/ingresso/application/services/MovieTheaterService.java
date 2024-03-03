@@ -65,9 +65,9 @@ public class MovieTheaterService implements IMovieTheaterService {
             MovieDTO movieDTO = resultMovieDTO.Data;
             RegionDTO regionDTO = resultRegionDTOId.Data;
 
-            MovieTheaterDTO movieTheaterDTOIfThereIs = movieTheaterRepository.getMovieTheaterIfThereIs(movieDTO.getId(), regionDTO.getId());
+            MovieTheater movieTheaterIfThereIs = movieTheaterRepository.getMovieTheaterIfThereIs(movieDTO.getId(), regionDTO.getId());
 
-            if(movieTheaterDTOIfThereIs != null)
+            if(movieTheaterIfThereIs != null)
                 return ResultService.Fail("error this junction already exists");
 
             MovieTheater movieTheater = new MovieTheater(UUID.randomUUID(), movieDTO.getId(), regionDTO.getId());

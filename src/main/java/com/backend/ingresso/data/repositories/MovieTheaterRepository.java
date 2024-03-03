@@ -18,9 +18,8 @@ public class MovieTheaterRepository implements IMovieTheaterRepository {
         this.movieTheaterRepositoryJPA = movieTheaterRepositoryJPA;
     }
 
-    public MovieTheaterDTO getMovieTheaterIfThereIs(UUID movieId, UUID regionId){
-        MovieTheaterDTO movieTheaterDTO = movieTheaterRepositoryJPA.getMovieTheaterIfThereIs(movieId, regionId);
-        return movieTheaterDTO;
+    public MovieTheater getMovieTheaterIfThereIs(UUID movieId, UUID regionId){
+        return movieTheaterRepositoryJPA.getMovieTheaterIfThereIs(movieId, regionId);
     }
 
     public MovieTheater create(MovieTheater movieTheater){

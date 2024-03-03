@@ -33,6 +33,18 @@ public class UserPermission {
         PermissionId = permissionId;
         Permission = permission;
     }
+
+    public UserPermission(UUID id, UUID userId, User user, UUID permissionId, Permission permission) {
+        Id = id;
+        UserId = userId;
+        User = user;
+        PermissionId = permissionId;
+        Permission = permission;
+    }
+
+    public UserPermission() {
+    }
+
     public UUID getId() {
         return Id;
     }

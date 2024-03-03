@@ -148,7 +148,7 @@ public class MovieTheaterServiceTest {
         when(movieService.getIdMovieByTitle(any())).thenReturn(ResultService.Ok(movieDTO));
         when(regionService.getIdRegionByState(any())).thenReturn(ResultService.Ok(regionDTO));
         when(movieTheaterRepository.getMovieTheaterIfThereIs(any(), any()))
-                .thenReturn(new MovieTheaterDTO());
+                .thenReturn(new MovieTheater());
 
         var result = movieTheaterService.create(movieTheaterCreate, resultError);
 

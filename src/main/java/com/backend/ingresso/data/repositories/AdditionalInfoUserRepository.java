@@ -1,5 +1,6 @@
 package com.backend.ingresso.data.repositories;
 
+import com.backend.ingresso.application.dto.AdditionalInfoUserDTO;
 import com.backend.ingresso.application.services.ResultService;
 import com.backend.ingresso.data.context.AdditionalInfoUserRepositoryJPA;
 import com.backend.ingresso.domain.entities.AdditionalInfoUser;
@@ -25,39 +26,15 @@ public class AdditionalInfoUserRepository implements IAdditionalInfoUserReposito
     }
 
     @Override
-    public AdditionalInfoUser getInfoUser(UUID idGuid) throws ParseException {
-        String query = additionalInfoUserRepositoryJPA.getInfoUser(idGuid);
-
-        if(query == null){
-            return null;
-        }
-
+    public AdditionalInfoUser getInfoUser(UUID idGuid) {
+        return additionalInfoUserRepositoryJPA.getInfoUser(idGuid);
         //a.BirthDate, a.Gender, a.Phone, a.Cep, a.Logradouro, a.Numero, a.Complemento, a.Referencia, a.Bairro, a.Estado, a.Cidade
-
-        String[] stringSplit = query.split(",");
-
-        String birthDate = stringSplit[0]; //Testar esse birsth
-        Timestamp birthDateTimestamp;
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date parsedDate = dateFormat.parse(birthDate);
-        Timestamp timestamp = new Timestamp(parsedDate.getTime());
-
-        return new AdditionalInfoUser(null, null, timestamp, stringSplit[1], stringSplit[2], stringSplit[3],stringSplit[4], stringSplit[5],
-                stringSplit[6], stringSplit[7], stringSplit[8], stringSplit[9], stringSplit[10]);
     }
 
     @Override
     public AdditionalInfoUser getByIdGuidUser(UUID idGuid) {
-        String query = additionalInfoUserRepositoryJPA.getByIdGuidUser(idGuid);
+        return additionalInfoUserRepositoryJPA.getByIdGuidUser(idGuid);
         //@Query("SELECT a.Id FROM AdditionalInfoUser AS a WHERE a.UserId = :idGuid")
-        if(query == null){
-            return null;
-        }
-
-        var addUser = new AdditionalInfoUser();
-        addUser.setId(UUID.fromString(query));
-        return addUser;
     }
 
     @Override

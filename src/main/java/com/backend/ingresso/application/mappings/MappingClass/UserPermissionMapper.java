@@ -54,9 +54,9 @@ public class UserPermissionMapper implements IUserPermissionMapper {
             PermissionDTO permissionDTO = new PermissionDTO(null, el.getPermission().getVisualName(), el.getPermission().getPermissionName());
             UserPermissionDTO userPermissionNew;
             if(el.getPermission() != null){
-                userPermissionNew = new UserPermissionDTO(el.getId(), el.getUserId(), el.getPermissionId(), null, permissionDTO);
+                userPermissionNew = new UserPermissionDTO(el.getId(), el.getUserId(), null, el.getPermissionId(), permissionDTO);
             }else {
-                userPermissionNew = new UserPermissionDTO(el.getId(), el.getUserId(), el.getPermissionId(), null, null);
+                userPermissionNew = new UserPermissionDTO(el.getId(), el.getUserId(), null, el.getPermissionId(), null);
             }
             listUserPermissionDto.add(userPermissionNew);
         });

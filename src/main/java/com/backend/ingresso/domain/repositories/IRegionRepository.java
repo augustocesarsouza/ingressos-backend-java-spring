@@ -6,7 +6,7 @@ import com.backend.ingresso.domain.entities.Region;
 import java.util.UUID;
 
 public interface IRegionRepository {
-    public RegionDTO getRegionIdByCityName(String city);
-    public RegionDTO getIdByNameState(String state);
+    Region getRegionIdByCityName(String city);
+    Region getIdByNameState(String state);
     Region create(Region region);
 }

@@ -32,12 +32,12 @@ public class MovieTheaterRepositoryTest {
         String regionId = "f243693b-a3ce-496b-94fa-1e04236b1752";
 
         when(movieTheaterRepositoryJPA.getMovieTheaterIfThereIs(any(), any()))
-                .thenReturn(new MovieTheaterDTO());
+                .thenReturn(new MovieTheater());
 
-        MovieTheaterDTO movieTheaterDTO = movieTheaterRepository.getMovieTheaterIfThereIs(
+        MovieTheater movieTheater = movieTheaterRepository.getMovieTheaterIfThereIs(
                 UUID.fromString(movieId), UUID.fromString(regionId));
 
-        assertNotNull(movieTheaterDTO);
+        assertNotNull(movieTheater);
     }
 
     @Test
@@ -48,10 +48,10 @@ public class MovieTheaterRepositoryTest {
         when(movieTheaterRepositoryJPA.getMovieTheaterIfThereIs(any(), any()))
                 .thenReturn(null);
 
-        MovieTheaterDTO movieTheaterDTO = movieTheaterRepository.getMovieTheaterIfThereIs(
+        MovieTheater movieTheater = movieTheaterRepository.getMovieTheaterIfThereIs(
                 UUID.fromString(movieId), UUID.fromString(regionId));
 
-        assertNull(movieTheaterDTO);
+        assertNull(movieTheater);
     }
 
     @Test

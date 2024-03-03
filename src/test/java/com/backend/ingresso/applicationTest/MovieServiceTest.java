@@ -101,7 +101,7 @@ public class MovieServiceTest {
     public void should_GetInfoMoviesById_WithoutErrors(){
         String movieId = "08b74c56-af65-4018-919f-07c42267b6fa";
 
-        when(movieRepository.getInfoMoviesById(any())).thenReturn(new MovieDTO());
+        when(movieRepository.getInfoMoviesById(any())).thenReturn(new Movie());
 
         // Act
         var result = movieService.getInfoMoviesById(UUID.fromString(movieId));
@@ -127,7 +127,7 @@ public class MovieServiceTest {
     public void should_GetStatusMovie_WithoutErrors(){
         String statusMovie = "seila";
 
-        when(movieRepository.getStatusMovie(any())).thenReturn(new MovieDTO());
+        when(movieRepository.getStatusMovie(any())).thenReturn(new Movie());
 
         // Act
         var result = movieService.getStatusMovie(statusMovie);
@@ -262,12 +262,12 @@ public class MovieServiceTest {
     public void should_DeleteMovie_WithoutErrors(){
         String movieDeleteId = "08b74c56-af65-4018-919f-07c42267b6fa";
 
-        MovieDTO movieDTO = new MovieDTO(null, null,
+        Movie movie = new Movie(null, null,
                 null, null, null, null,
                 null,"publicId1", null,
                 "publicIdImgBackground1", null);
 
-        when(movieRepository.getMovieByIdForDelete(any())).thenReturn(movieDTO);
+        when(movieRepository.getMovieByIdForDelete(any())).thenReturn(movie);
         when(cloudinaryUti.deleteImg(any())).thenReturn(
                 ResultService.Ok("create cloudinary img successfully"));
         when(movieRepository.delete(any())).thenReturn(new Movie());
@@ -297,12 +297,12 @@ public class MovieServiceTest {
     public void should_DeleteMovie_ErrorCreateCloudinaryImg(){
         String movieDeleteId = "08b74c56-af65-4018-919f-07c42267b6fa";
 
-        MovieDTO movieDTO = new MovieDTO(null, null,
+        Movie movie = new Movie(null, null,
                 null, null, null, null,
                 null,"publicId1", null,
                 "publicIdImgBackground1", null);
 
-        when(movieRepository.getMovieByIdForDelete(any())).thenReturn(movieDTO);
+        when(movieRepository.getMovieByIdForDelete(any())).thenReturn(movie);
         when(cloudinaryUti.deleteImg(any())).thenReturn(
                 ResultService.Fail("error when create cloudinary img"));
 
@@ -318,12 +318,12 @@ public class MovieServiceTest {
     public void should_DeleteMovie_ErrorDeleteRepositoryMovie(){
         String movieDeleteId = "08b74c56-af65-4018-919f-07c42267b6fa";
 
-        MovieDTO movieDTO = new MovieDTO(null, null,
+        Movie movie = new Movie(null, null,
                 null, null, null, null,
                 null,"publicId1", null,
                 "publicIdImgBackground1", null);
 
-        when(movieRepository.getMovieByIdForDelete(any())).thenReturn(movieDTO);
+        when(movieRepository.getMovieByIdForDelete(any())).thenReturn(movie);
         when(cloudinaryUti.deleteImg(any())).thenReturn(
                 ResultService.Ok("create cloudinary img successfully"));
         when(movieRepository.delete(any())).thenReturn(null);
@@ -333,7 +333,7 @@ public class MovieServiceTest {
 
         // Assert
         assertFalse(result.IsSuccess);
-        assertEquals(result.Message, "error found when deleting image in repository");
+        assertEquals(result.Message, "error found when deleting movie in repository");
     }
 
     @Test
@@ -346,12 +346,12 @@ public class MovieServiceTest {
 
         var resultError = new BeanPropertyBindingResult(movieUpdateValidatorDTO, "movieUpdateValidatorDTO");
 
-        MovieDTO movieDTO = new MovieDTO(null, null,
+        Movie movie = new Movie(null, null,
                 null, null, null, null,
                 null,"publicId1", null,
                 "publicIdImgBackground1", null);
 
-        when(movieRepository.getMovieByIdForDelete(any())).thenReturn(movieDTO);
+        when(movieRepository.getMovieByIdForDelete(any())).thenReturn(movie);
         when(cloudinaryUti.deleteImg(any())).thenReturn(ResultService.Ok("delete successfully"));
         when(cloudinaryUti.CreateImg(any(), anyInt(), anyInt())).thenReturn(
                 ResultService.Ok(new CloudinaryCreate("publicId1", "imgUrl1")));
@@ -439,12 +439,12 @@ public class MovieServiceTest {
 
         var resultError = new BeanPropertyBindingResult(movieUpdateValidatorDTO, "movieUpdateValidatorDTO");
 
-        MovieDTO movieDTO = new MovieDTO(null, null,
+        Movie movie = new Movie(null, null,
                 null, null, null, null,
                 null,"publicId1", null,
                 "publicIdImgBackground1", null);
 
-        when(movieRepository.getMovieByIdForDelete(any())).thenReturn(movieDTO);
+        when(movieRepository.getMovieByIdForDelete(any())).thenReturn(movie);
         when(cloudinaryUti.deleteImg(any())).thenReturn(
                 ResultService.Fail("error delete cloudinary img"));
 
@@ -466,12 +466,12 @@ public class MovieServiceTest {
 
         var resultError = new BeanPropertyBindingResult(movieUpdateValidatorDTO, "movieUpdateValidatorDTO");
 
-        MovieDTO movieDTO = new MovieDTO(null, null,
+        Movie movie = new Movie(null, null,
                 null, null, null, null,
                 null,"publicId1", null,
                 "publicIdImgBackground1", null);
 
-        when(movieRepository.getMovieByIdForDelete(any())).thenReturn(movieDTO);
+        when(movieRepository.getMovieByIdForDelete(any())).thenReturn(movie);
         when(cloudinaryUti.deleteImg(any())).thenReturn(ResultService.Ok("delete successfully"));
         when(cloudinaryUti.CreateImg(any(), anyInt(), anyInt())).thenReturn(
                 ResultService.Fail("error create cloudinary img"));
@@ -494,12 +494,12 @@ public class MovieServiceTest {
 
         var resultError = new BeanPropertyBindingResult(movieUpdateValidatorDTO, "movieUpdateValidatorDTO");
 
-        MovieDTO movieDTO = new MovieDTO(null, null,
+        Movie movie = new Movie(null, null,
                 null, null, null, null,
                 null,"publicId1", null,
                 "publicIdImgBackground1", null);
 
-        when(movieRepository.getMovieByIdForDelete(any())).thenReturn(movieDTO);
+        when(movieRepository.getMovieByIdForDelete(any())).thenReturn(movie);
         when(cloudinaryUti.deleteImg(any())).thenReturn(ResultService.Ok("delete successfully"));
         when(cloudinaryUti.CreateImg(any(), anyInt(), anyInt())).thenReturn(
                 ResultService.Ok(new CloudinaryCreate("publicId1", "imgUrl1")));

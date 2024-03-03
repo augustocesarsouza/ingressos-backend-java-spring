@@ -21,11 +21,11 @@ public class UserPermissionDTO {
         PermissionId = permissionId;
     }
 
-    public UserPermissionDTO(UUID id, UUID userId, UUID permissionId, UserDTO userDTO, PermissionDTO permissionDTO) {
+    public UserPermissionDTO(UUID id, UUID userId, UserDTO userDTO, UUID permissionId, PermissionDTO permissionDTO) {
         Id = id;
         UserId = userId;
-        PermissionId = permissionId;
         this.userDTO = userDTO;
+        PermissionId = permissionId;
         this.permissionDTO = permissionDTO;
     }
 

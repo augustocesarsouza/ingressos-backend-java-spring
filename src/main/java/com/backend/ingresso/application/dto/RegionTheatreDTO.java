@@ -8,11 +8,11 @@ public class RegionTheatreDTO {
     @JsonProperty("id")
     private UUID Id;
     @JsonProperty("theatreId")
-    private String TheatreId;
+    private UUID TheatreId;
     @JsonProperty("regionId")
-    private String RegionId;
+    private UUID RegionId;
 
-    public RegionTheatreDTO(UUID id, String theatreId, String regionId) {
+    public RegionTheatreDTO(UUID id, UUID theatreId, UUID regionId) {
         Id = id;
         TheatreId = theatreId;
         RegionId = regionId;
@@ -22,11 +22,11 @@ public class RegionTheatreDTO {
         return Id;
     }
 
-    public String getTheatreId() {
+    public UUID getTheatreId() {
         return TheatreId;
     }
 
-    public String getRegionId() {
+    public UUID getRegionId() {
         return RegionId;
     }
 }

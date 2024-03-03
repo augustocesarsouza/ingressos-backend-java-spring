@@ -28,7 +28,7 @@ public class Theatre {
     private String Location;
     @Column(name = "type_of_attraction")
     @JsonProperty("typeOfAttraction")
-    private Integer TypeOfAttraction;
+    private String TypeOfAttraction;
     @Column(name = "category")
     @JsonProperty("category")
     private String Category;
@@ -42,7 +42,7 @@ public class Theatre {
     private List<RegionTheatre> regionTheatresList;
 
     public Theatre(UUID id, String title, String description, Timestamp data,
-                   String location, Integer typeOfAttraction, String category,
+                   String location, String typeOfAttraction, String category,
                    String publicId, String imgUrl) {
         Id = id;
         Title = title;
@@ -53,6 +53,9 @@ public class Theatre {
         Category = category;
         PublicId = publicId;
         ImgUrl = imgUrl;
+    }
+
+    public Theatre() {
     }
 
     public UUID getId() {
@@ -75,7 +78,7 @@ public class Theatre {
         return Location;
     }
 
-    public Integer getTypeOfAttraction() {
+    public String getTypeOfAttraction() {
         return TypeOfAttraction;
     }
 
@@ -89,5 +92,10 @@ public class Theatre {
 
     public String getImgUrl() {
         return ImgUrl;
+    }
+
+    public void setImgUpdate(String imgUrl, String publicId){
+        ImgUrl = imgUrl;
+        PublicId = publicId;
     }
 }

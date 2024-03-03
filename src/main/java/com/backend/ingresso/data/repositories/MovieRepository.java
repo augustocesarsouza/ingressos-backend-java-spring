@@ -20,48 +20,23 @@ public class MovieRepository implements IMovieRepository {
     }
 
     @Override
-    public MovieDTO getById(UUID movieId) {
-        MovieDTO movieDTO = movieRepositoryJPA.getMovieById_Info_Id_Title(movieId);
-
-        if(movieDTO == null)
-            return null;
-
-
-        return movieDTO;
+    public Movie getById(UUID movieId) {
+        return movieRepositoryJPA.getMovieById_Info_Id_Title(movieId);
     }
 
     @Override
-    public MovieDTO getInfoMoviesById(UUID movieId) {
-        MovieDTO movieDTO = movieRepositoryJPA.getMovieById(movieId);
-        // trocar
-
-        if(movieDTO == null)
-            return null;
-
-        return movieDTO;
+    public Movie getInfoMoviesById(UUID movieId) {
+        return movieRepositoryJPA.getMovieById(movieId);
     }
 
     @Override
-    public MovieDTO getStatusMovie(String statusMovie) {
-        MovieDTO movieDTO = movieRepositoryJPA.getMovieByStatusMovie(statusMovie);
-
-        if(movieDTO == null){
-            return null;
-        }
-
-        return movieDTO;
+    public Movie getStatusMovie(String statusMovie) {
+        return movieRepositoryJPA.getMovieByStatusMovie(statusMovie);
     }
 
     @Override
-    public MovieDTO getMovieByIdForDelete(UUID movieId) {
-        MovieDTO movie = movieRepositoryJPA.getMovieByIdForDelete(movieId);
-        //testar
-
-        if(movie == null){
-            return null;
-        }
-
-        return movie;
+    public Movie getMovieByIdForDelete(UUID movieId) {
+        return movieRepositoryJPA.getMovieByIdForDelete(movieId);
     }
 
     @Override
@@ -75,10 +50,8 @@ public class MovieRepository implements IMovieRepository {
     }
 
     @Override
-    public MovieDTO getMovieByTitle(String title) {
-        MovieDTO movieDto = movieRepositoryJPA.getMovieByTitle(title);
-
-        return movieDto;
+    public Movie getMovieByTitle(String title) {
+        return movieRepositoryJPA.getMovieByTitle(title);
     }
 
     @Override
