@@ -1,7 +1,5 @@
 package com.backend.ingresso.dataTest.repositories;
 
-import com.backend.ingresso.application.dto.MovieDTO;
-import com.backend.ingresso.application.dto.RegionDTO;
 import com.backend.ingresso.data.context.RegionRepositoryJPA;
 import com.backend.ingresso.data.repositories.RegionRepository;
 import com.backend.ingresso.domain.entities.Region;
@@ -9,8 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;

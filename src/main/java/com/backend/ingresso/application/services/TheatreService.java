@@ -48,16 +48,25 @@ public class TheatreService implements ITheatreService {
     }
 
     @Override
+    @Transactional
     public ResultService<List<TheatreDTO>> getAllTheatreByRegionId(String region) {
-        var regionResult = regionService.getIdByNameState(region);
-        if(!regionResult.IsSuccess || regionResult.Data == null)
-            return ResultService.Fail(regionResult.Message);
+        try {
+            var regionResult = regionService.getIdByNameState(region);
 
-        RegionDTO regionDTO = regionResult.Data;
+            if(!regionResult.IsSuccess || regionResult.Data == null)
+                return ResultService.Fail(regionResult.Message);
 
-        var resultTheatreAll = theatreRepository.getAllTheatreByRegionId(regionDTO.getId());
+            RegionDTO regionDTO = regionResult.Data;
 
-        return ResultService.Ok(resultTheatreAll);
+            var resultTheatreAll = theatreRepository.getAllTheatreByRegionId(regionDTO.getId());
+
+            if(resultTheatreAll == null)
+                return ResultService.Fail("error get all theatre null");
+
+            return ResultService.Ok(resultTheatreAll);
+        }catch (Exception ex){
+            return ResultService.Fail(ex.getMessage());
+        }
     }
 
     @Override
@@ -81,7 +90,7 @@ public class TheatreService implements ITheatreService {
             Pattern pattern = Pattern.compile(regex);
 
             if(!pattern.matcher(dateString).matches())
-                return ResultService.Fail("error data should be in this format dd/mm/AAA");
+                return ResultService.Fail("error data should be in this format dd/mm/AAAA mm:HH");
 
             DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy HH:mm");
             DateTime date = DateTime.parse(dateString, formatter);
@@ -114,6 +123,7 @@ public class TheatreService implements ITheatreService {
     }
 
     @Override
+    @Transactional
     public ResultService<TheatreDTO> deleteTheatre(String theatreId) {
         try {
             if(!ValidateUUID.Validate(theatreId))
@@ -145,6 +155,7 @@ public class TheatreService implements ITheatreService {
     }
 
     @Override
+    @Transactional
     public ResultService<TheatreDTO> updateImgTheatre(TheatreUpdateValidatorDTO theatreUpdateValidatorDTO, BindingResult result) {
         if(result.hasErrors()){
             var errorsDTO = result.getAllErrors();

@@ -3,6 +3,7 @@ package com.backend.ingresso;
 import com.backend.ingresso.applicationTest.MovieServiceTest;
 import com.backend.ingresso.applicationTest.MovieTheaterServiceTest;
 import com.backend.ingresso.applicationTest.RegionServiceTest;
+import com.backend.ingresso.applicationTest.TheatreServiceTest;
 import com.backend.ingresso.applicationTest.userServiceTest.UserAuthenticationServiceTest;
 import com.backend.ingresso.applicationTest.userServiceTest.UserConfirmationServiceTest;
 import com.backend.ingresso.applicationTest.userServiceTest.UserManagementServiceTest;
@@ -23,6 +24,7 @@ import org.junit.platform.suite.api.Suite;
         MovieRepositoryTest.class, UserPermissionRepositoryTest.class, UserRepositoryTest.class,
         SendEmailBrevoTest.class,SendEmailUserTest.class, UserTest.class, MovieServiceTest.class,
         RegionRepositoryTest.class, RegionServiceTest.class, MovieTheaterRepositoryTest.class,
-        MovieTheaterServiceTest.class})
+        MovieTheaterServiceTest.class, TheatreRepositoryTest.class,
+        TheatreServiceTest.class})
 public class TestAllClass {
 }

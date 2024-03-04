@@ -11,7 +11,8 @@ import java.util.UUID;
 @Repository
 public interface TheatreRepositoryJPA extends JpaRepository<Theatre, UUID> {
     //Theatre(UUID id, String title, String description, Timestamp data,String location, String typeOfAttraction, String category ,String publicId, String imgUrl)
-    //
+
+    //Theatre(t.Id, t.Title, null, t.Data, t.Location, t.TypeOfAttraction, t.Category, t.PublicId, t.ImgUrl)
     @Query("SELECT new com.backend.ingresso.domain.entities." +
             "Theatre(t.Id, t.Title, null, null, null, null, null, null, null) " +
             "FROM Theatre AS t WHERE t.Id = :theatreId")

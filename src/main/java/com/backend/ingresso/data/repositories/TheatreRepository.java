@@ -21,21 +21,33 @@ public class TheatreRepository implements ITheatreRepository {
 
     @Override
     public Theatre getById(UUID theatreId) {
+        if(theatreId == null)
+            return null;
+
         return theatreRepositoryJPA.getByTheatreId(theatreId);
     }
 
     @Override
     public Theatre getByTheatreIdIdPublicId(UUID theatreId) {
+        if(theatreId == null)
+            return null;
+
         return theatreRepositoryJPA.getByTheatreIdIdPublicId(theatreId);
     }
 
     @Override
     public Theatre getByIdAllProps(UUID theatreId) {
+        if(theatreId == null)
+            return null;
+
         return theatreRepositoryJPA.findById(theatreId).orElse(null);
     }
 
     @Override
     public List<TheatreDTO> getAllTheatreByRegionId(UUID regionId) {
+        if(regionId == null)
+            return null;
+
         return theatreRepositoryJPA.getAllTheatreByRegionId(regionId);
     }
 
@@ -64,6 +76,9 @@ public class TheatreRepository implements ITheatreRepository {
 
     @Override
     public Theatre delete(UUID theatreId) {
+        if(theatreId == null)
+            return null;
+
         Theatre theatreDelete = theatreRepositoryJPA.findById(theatreId).orElse(null);
 
         if(theatreDelete == null)

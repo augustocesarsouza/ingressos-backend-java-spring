@@ -53,6 +53,9 @@ public class TheatreCreateValidatorDTO {
         Base64Img = base64Img;
     }
 
+    public TheatreCreateValidatorDTO() {
+    }
+
     public UUID getId() {
         return Id;
     }
