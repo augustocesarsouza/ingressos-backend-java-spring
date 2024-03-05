@@ -23,6 +23,11 @@ public class MovieRegionTicketsPurchesedRepository implements IMovieRegionTicket
     }
 
     @Override
+    public MovieRegionTicketsPurchesed getByMovieIdAndCinemaIdAndIdTicketsSeats(UUID movieId, UUID cinemaId){
+        return movieRegionTicketsPurchesedJPA.getByMovieIdAndCinemaIdAndIdTicketsSeats(movieId, cinemaId);
+    }
+
+    @Override
     public MovieRegionTicketsPurchesed create(MovieRegionTicketsPurchesed movieRegionTicketsPurchesed) {
         if(movieRegionTicketsPurchesed == null)
             return null;
@@ -35,14 +40,8 @@ public class MovieRegionTicketsPurchesedRepository implements IMovieRegionTicket
         if(movieRegionTicketsPurchesed == null)
             return null;
 
-        MovieRegionTicketsPurchesed ticketsPurchesed = movieRegionTicketsPurchesedJPA.getByMovieIdAndCinemaIdOnlyId(
-                movieRegionTicketsPurchesed.getMovieId(), movieRegionTicketsPurchesed.getCinemaId());
-
-        if(ticketsPurchesed == null)
-            return null;
-
         MovieRegionTicketsPurchesed ticketsPurchesedForUpdate = movieRegionTicketsPurchesedJPA.findById(
-                ticketsPurchesed.getId()).orElse(null);
+                movieRegionTicketsPurchesed.getId()).orElse(null);
 
         if(ticketsPurchesedForUpdate == null)
             return null;

@@ -5,5 +5,6 @@ import com.backend.ingresso.domain.entities.MovieRegionTicketsPurchesed;
 
 public interface IMovieRegionTicketsPurchesedMapper {
     MovieRegionTicketsPurchesedDTO movieRegionTicketsPurchesedToMovieRegionTicketsPurchesedDTO(MovieRegionTicketsPurchesed movieRegionTicketsPurchesed);
+    MovieRegionTicketsPurchesedDTO movieRegionTicketsPurchesedToMovieRegionTicketsPurchesedDtoUpdate(MovieRegionTicketsPurchesed movieRegionTicketsPurchesed);
     MovieRegionTicketsPurchesed movieRegionTicketsPurchesedDtoToMovieRegionTicketsPurchesed(MovieRegionTicketsPurchesedDTO movieRegionTicketsPurchesedDTO);
 }

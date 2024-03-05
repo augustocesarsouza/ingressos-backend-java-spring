@@ -1,11 +1,13 @@
 package com.backend.ingresso.application.services;
 
 import com.backend.ingresso.application.dto.CinemaDTO;
+import com.backend.ingresso.application.dto.MovieDTO;
 import com.backend.ingresso.application.dto.validateErrosDTOs.IValidateErrorsDTO;
 import com.backend.ingresso.application.dto.validations.cinemaDTOs.CinemaCreateDTO;
 import com.backend.ingresso.application.mappings.MappingClassInterface.ICinemaMapper;
 import com.backend.ingresso.application.services.interfaces.ICinemaService;
 import com.backend.ingresso.domain.entities.Cinema;
+import com.backend.ingresso.domain.entities.Movie;
 import com.backend.ingresso.domain.repositories.ICinemaRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,24 @@ public class CinemaService implements ICinemaService {
         this.cinemaRepository = cinemaRepository;
         this.cinemaMapper = cinemaMapper;
         this.validateErrorsDTO = validateErrorsDTO;
+    }
+
+    @Override
+    public ResultService<CinemaDTO> getCheckIfCinemaExistsById(UUID cinemaId) {
+        if(cinemaId == null)
+            return ResultService.Fail("error cinemaId null");
+
+        try {
+            Cinema cinema = cinemaRepository.getById(cinemaId);
+
+            if(cinema == null)
+                return ResultService.Fail("error cinema not exist");
+
+            return ResultService.Ok(cinemaMapper.cinemaToCinemaDto(cinema));
+
+        }catch (Exception ex){
+            return ResultService.Fail(ex.getMessage());
+        }
     }
 
     @Override

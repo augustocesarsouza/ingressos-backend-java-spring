@@ -18,6 +18,11 @@ public class CinemaRepository implements ICinemaRepository {
     }
 
     @Override
+    public Cinema getById(UUID cinemaId) {
+        return cinemaRepositoryJPA.getCinemaById_Info_Id(cinemaId);
+    }
+
+    @Override
     public Cinema create(Cinema cinema) {
         if(cinema == null)
             return null;

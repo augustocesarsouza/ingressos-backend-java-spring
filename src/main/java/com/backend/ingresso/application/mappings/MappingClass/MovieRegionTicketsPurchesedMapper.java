@@ -32,6 +32,18 @@ public class MovieRegionTicketsPurchesedMapper implements IMovieRegionTicketsPur
     }
 
     @Override
+    public MovieRegionTicketsPurchesedDTO movieRegionTicketsPurchesedToMovieRegionTicketsPurchesedDtoUpdate(MovieRegionTicketsPurchesed movieRegionTicketsPurchesed) {
+        if(movieRegionTicketsPurchesed == null)
+            return null;
+
+        return new MovieRegionTicketsPurchesedDTO(movieRegionTicketsPurchesed.getId(),
+                movieRegionTicketsPurchesed.getTicketsSeats(), movieRegionTicketsPurchesed.getMovieId(),
+                null,
+                movieRegionTicketsPurchesed.getCinemaId(),
+                null);
+    }
+
+    @Override
     public MovieRegionTicketsPurchesed movieRegionTicketsPurchesedDtoToMovieRegionTicketsPurchesed(MovieRegionTicketsPurchesedDTO movieRegionTicketsPurchesedDTO) {
         if(movieRegionTicketsPurchesedDTO == null)
             return null;

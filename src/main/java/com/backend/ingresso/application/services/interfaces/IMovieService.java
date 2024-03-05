@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface IMovieService {
+    ResultService<MovieDTO> getCheckIfMovieExistsById(UUID movieId);
     ResultService<List<MovieDTO>> getAllMovieByRegionId(String region);
     ResultService<MovieDTO> getInfoMoviesById(UUID movieId);
     ResultService<MovieDTO> getIdMovieByTitle(String title);

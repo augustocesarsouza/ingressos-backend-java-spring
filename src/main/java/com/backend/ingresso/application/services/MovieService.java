@@ -40,6 +40,24 @@ public class MovieService implements IMovieService {
     }
 
     @Override
+    public ResultService<MovieDTO> getCheckIfMovieExistsById(UUID movieId) {
+        if(movieId == null)
+            return ResultService.Fail("error movieId null");
+
+        try {
+            Movie movie = movieRepository.getById(movieId);
+
+            if(movie == null)
+                return ResultService.Fail("error movie not exist");
+
+            return ResultService.Ok(movieMapper.movieToMovieDto(movie));
+
+        }catch (Exception ex){
+            return ResultService.Fail(ex.getMessage());
+        }
+    }
+
+    @Override
     public ResultService<List<MovieDTO>> getAllMovieByRegionId(String region) {
         ResultService<RegionDTO> regionId = regionService.getIdByNameState(region);
 

@@ -67,15 +67,28 @@ public class MovieRegionTicketsPurchesed {
         TicketsSeats = ticketsSeats;
     }
 
+    public void setId(UUID id) {
+        Id = id;
+    }
+
     public void setIdMovieIdCinemaId(UUID id, UUID movieId, UUID cinemaId){
         Id = id;
         MovieId = movieId;
         CinemaId = cinemaId;
     }
 
-    public void setMovieIdCinemaIdTicketsSeats(UUID movieId, UUID cinemaId, String ticketsSeats){
+    public void setMovieIdCinemaIdTicketsSeats(UUID movieId, UUID cinemaId){
         MovieId = movieId;
         CinemaId = cinemaId;
-        TicketsSeats = ticketsSeats;
+    }
+
+    public void ticketsSeatsValue(String ticketsSeats, String ticketsSeatsBank){
+        if(ticketsSeatsBank.isEmpty()){
+            TicketsSeats = ticketsSeats;
+        }else if(ticketsSeats.isEmpty()){
+            TicketsSeats = ticketsSeats;
+        }else if(!ticketsSeatsBank.isEmpty()){
+            TicketsSeats = String.format("%s,%s", ticketsSeatsBank, ticketsSeats);
+        }
     }
 }

@@ -17,4 +17,8 @@ public interface MovieRegionTicketsPurchesedJPA extends JpaRepository<MovieRegio
             "MovieRegionTicketsPurchesed(mt.Id, null, null, null, null, null) " +
             "FROM MovieRegionTicketsPurchesed AS mt WHERE mt.MovieId = :movieId AND mt.CinemaId = :cinemaId")
     MovieRegionTicketsPurchesed getByMovieIdAndCinemaIdOnlyId(UUID movieId, UUID cinemaId);
+    @Query("SELECT new com.backend.ingresso.domain.entities." +
+            "MovieRegionTicketsPurchesed(mt.Id, mt.TicketsSeats, null, null, null, null) " +
+            "FROM MovieRegionTicketsPurchesed AS mt WHERE mt.MovieId = :movieId AND mt.CinemaId = :cinemaId")
+    MovieRegionTicketsPurchesed getByMovieIdAndCinemaIdAndIdTicketsSeats(UUID movieId, UUID cinemaId);
 }

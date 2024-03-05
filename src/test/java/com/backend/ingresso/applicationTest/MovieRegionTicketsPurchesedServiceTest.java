@@ -7,6 +7,9 @@ import com.backend.ingresso.application.dto.validations.movieRegionTicketsPurche
 import com.backend.ingresso.application.dto.validations.movieRegionTicketsPurchesedDTOs.MovieRegionTicketsPurchesedUpdateDTO;
 import com.backend.ingresso.application.mappings.MappingClassInterface.IMovieRegionTicketsPurchesedMapper;
 import com.backend.ingresso.application.services.MovieRegionTicketsPurchesedService;
+import com.backend.ingresso.application.services.ResultService;
+import com.backend.ingresso.application.services.interfaces.ICinemaService;
+import com.backend.ingresso.application.services.interfaces.IMovieService;
 import com.backend.ingresso.domain.entities.MovieRegionTicketsPurchesed;
 import com.backend.ingresso.domain.repositories.IMovieRegionTicketsPurchesedRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,6 +32,10 @@ public class MovieRegionTicketsPurchesedServiceTest {
     @Mock
     private IMovieRegionTicketsPurchesedMapper movieRegionTicketsPurchesedMapper;
     @Mock
+    private IMovieService movieService;
+    @Mock
+    private ICinemaService cinemaService;
+    @Mock
     private IValidateErrorsDTO validateErrorsDTO;
 
     private MovieRegionTicketsPurchesedService movieRegionTicketsPurchesedService;
@@ -39,6 +46,7 @@ public class MovieRegionTicketsPurchesedServiceTest {
         movieRegionTicketsPurchesedService = new MovieRegionTicketsPurchesedService(
                 movieRegionTicketsPurchesedRepository,
                 movieRegionTicketsPurchesedMapper,
+                movieService, cinemaService,
                 validateErrorsDTO
         );
     }
@@ -114,6 +122,12 @@ public class MovieRegionTicketsPurchesedServiceTest {
                         UUID.fromString("7a002069-c938-4e77-b808-3e31d9456cd6"), null
                 );
 
+        when(movieService.getCheckIfMovieExistsById(any())).
+                thenReturn(ResultService.Ok("get movie successfully"));
+
+        when(cinemaService.getCheckIfCinemaExistsById(any())).
+                thenReturn(ResultService.Ok("get cinema successfully"));
+
         when(movieRegionTicketsPurchesedRepository.
                 create(any())).
                 thenReturn(movieRegionTicketsPurchesed);
@@ -182,7 +196,6 @@ public class MovieRegionTicketsPurchesedServiceTest {
                         resultError);
 
         assertFalse(result.IsSuccess);
-        assertEquals(result.Message, "Cannot invoke \"String.length()\" because \"name\" is null");
     }
 
     @Test
@@ -199,7 +212,83 @@ public class MovieRegionTicketsPurchesedServiceTest {
                         resultError);
 
         assertFalse(result.IsSuccess);
-        assertEquals(result.Message, "Cannot invoke \"String.length()\" because \"name\" is null");
+    }
+
+    @Test
+    public void should_Create_ErrorValidateMovieId(){
+        MovieRegionTicketsPurchesedCreateDTO movieRegionTicketsPurchesedCreateDTO =
+                new MovieRegionTicketsPurchesedCreateDTO(
+                        null, "25e96c07-4380-4c74-b43f-cd428114e33",
+                        "7a002069-c938-4e77-b808-3e31d9456cd6");
+
+        var resultError = new BeanPropertyBindingResult(movieRegionTicketsPurchesedCreateDTO, "movieRegionTicketsPurchesedCreateDTO");
+
+        var result = movieRegionTicketsPurchesedService.
+                create(movieRegionTicketsPurchesedCreateDTO,
+                        resultError);
+
+        assertFalse(result.IsSuccess);
+        assertEquals(result.Message, "error movieId, not is UUID valid");
+    }
+
+    @Test
+    public void should_Create_ErrorValidateCinemaId(){
+        MovieRegionTicketsPurchesedCreateDTO movieRegionTicketsPurchesedCreateDTO =
+                new MovieRegionTicketsPurchesedCreateDTO(
+                        null, "25e96c07-4380-4c74-b43f-cd4281914e33",
+                        "7a002069-c938-4e77-b808-3e3d9456cd6");
+
+        var resultError = new BeanPropertyBindingResult(movieRegionTicketsPurchesedCreateDTO, "movieRegionTicketsPurchesedCreateDTO");
+
+        var result = movieRegionTicketsPurchesedService.
+                create(movieRegionTicketsPurchesedCreateDTO,
+                        resultError);
+
+        assertFalse(result.IsSuccess);
+        assertEquals(result.Message, "error cinemaId, not is UUID valid");
+    }
+
+    @Test
+    public void should_Create_ErrorMovieNotExist(){
+        MovieRegionTicketsPurchesedCreateDTO movieRegionTicketsPurchesedCreateDTO =
+                new MovieRegionTicketsPurchesedCreateDTO(
+                        null, "25e96c07-4380-4c74-b43f-cd4281914e33",
+                        "7a002069-c938-4e77-b808-3e31d9456cd6");
+
+        var resultError = new BeanPropertyBindingResult(movieRegionTicketsPurchesedCreateDTO, "movieRegionTicketsPurchesedCreateDTO");
+
+        when(movieService.getCheckIfMovieExistsById(any())).
+                thenReturn(ResultService.Fail("error get movie"));
+
+        var result = movieRegionTicketsPurchesedService.
+                create(movieRegionTicketsPurchesedCreateDTO,
+                        resultError);
+
+        assertFalse(result.IsSuccess);
+        assertEquals(result.Message, "error movie not exist");
+    }
+
+    @Test
+    public void should_Create_ErrorCinemaNotExist(){
+        MovieRegionTicketsPurchesedCreateDTO movieRegionTicketsPurchesedCreateDTO =
+                new MovieRegionTicketsPurchesedCreateDTO(
+                        null, "25e96c07-4380-4c74-b43f-cd4281914e33",
+                        "7a002069-c938-4e77-b808-3e31d9456cd6");
+
+        var resultError = new BeanPropertyBindingResult(movieRegionTicketsPurchesedCreateDTO, "movieRegionTicketsPurchesedCreateDTO");
+
+        when(movieService.getCheckIfMovieExistsById(any())).
+                thenReturn(ResultService.Ok("get movie successfully"));
+
+        when(cinemaService.getCheckIfCinemaExistsById(any())).
+                thenReturn(ResultService.Fail("error get cinema"));
+
+        var result = movieRegionTicketsPurchesedService.
+                create(movieRegionTicketsPurchesedCreateDTO,
+                        resultError);
+
+        assertFalse(result.IsSuccess);
+        assertEquals(result.Message, "error cinema not exist");
     }
 
     @Test
@@ -211,8 +300,27 @@ public class MovieRegionTicketsPurchesedServiceTest {
 
         var resultError = new BeanPropertyBindingResult(movieRegionTicketsPurchesedCreateDTO, "movieRegionTicketsPurchesedCreateDTO");
 
-        when(movieRegionTicketsPurchesedRepository.
-                create(any())).
+        MovieRegionTicketsPurchesed movieRegionTicketsPurchesed =
+                new MovieRegionTicketsPurchesed(
+                        null, null,
+                        UUID.fromString("25e96c07-4380-4c74-b43f-cd4281914e33"), null,
+                        UUID.fromString("7a002069-c938-4e77-b808-3e31d9456cd6"), null
+                );
+
+        MovieRegionTicketsPurchesedDTO movieRegionTicketsPurchesedDTO =
+                new MovieRegionTicketsPurchesedDTO(
+                        null, null,
+                        UUID.fromString("25e96c07-4380-4c74-b43f-cd4281914e33"), null,
+                        UUID.fromString("7a002069-c938-4e77-b808-3e31d9456cd6"), null
+                );
+
+        when(movieService.getCheckIfMovieExistsById(any())).
+                thenReturn(ResultService.Ok("get movie successfully"));
+
+        when(cinemaService.getCheckIfCinemaExistsById(any())).
+                thenReturn(ResultService.Ok("get cinema successfully"));
+
+        when(movieRegionTicketsPurchesedRepository.create(any())).
                 thenReturn(null);
 
         var result = movieRegionTicketsPurchesedService.
@@ -240,11 +348,15 @@ public class MovieRegionTicketsPurchesedServiceTest {
                         UUID.fromString("7a002069-c938-4e77-b808-3e31d9456cd6"), null);
 
         when(movieRegionTicketsPurchesedRepository.
+                getByMovieIdAndCinemaIdAndIdTicketsSeats(any(), any())).
+                thenReturn(new MovieRegionTicketsPurchesed());
+
+        when(movieRegionTicketsPurchesedRepository.
                 updateTicketsSeats(any())).
                 thenReturn(new MovieRegionTicketsPurchesed());
 
         when(movieRegionTicketsPurchesedMapper.
-                movieRegionTicketsPurchesedToMovieRegionTicketsPurchesedDTO(any())).
+                movieRegionTicketsPurchesedToMovieRegionTicketsPurchesedDtoUpdate(any())).
                 thenReturn(movieRegionTicketsPurchesedDTO);
 
         var result = movieRegionTicketsPurchesedService.
@@ -334,7 +446,11 @@ public class MovieRegionTicketsPurchesedServiceTest {
                         "A2", "25e96c07-4380-4c74-b43f-cd4281914e33",
                         "7a002069-c938-4e77-b808-3e31d9456cd6");
 
-        var resultError = new BeanPropertyBindingResult(movieRegionTicketsPurchesedUpdateDTO, "movieRegionTicketsPurchesedUpdateDTO");;
+        var resultError = new BeanPropertyBindingResult(movieRegionTicketsPurchesedUpdateDTO, "movieRegionTicketsPurchesedUpdateDTO");
+
+        when(movieRegionTicketsPurchesedRepository.
+                getByMovieIdAndCinemaIdAndIdTicketsSeats(any(), any())).
+                thenReturn(new MovieRegionTicketsPurchesed());
 
         when(movieRegionTicketsPurchesedRepository.
                 updateTicketsSeats(any())).
