@@ -3,7 +3,9 @@ package com.backend.ingresso.application.mappings.MappingClass;
 import com.backend.ingresso.application.dto.RegionTheatreDTO;
 import com.backend.ingresso.application.mappings.MappingClassInterface.IRegionTheatreMapper;
 import com.backend.ingresso.domain.entities.RegionTheatre;
+import org.springframework.stereotype.Component;
 
+@Component
 public class RegionTheatreMapper implements IRegionTheatreMapper {
     @Override
     public RegionTheatreDTO regionTheatreToRegionTheatreDto(RegionTheatre regionTheatre) {

@@ -20,7 +20,7 @@ public class CinemaMovieDTO {
     private UUID RegionId;
     @JsonProperty("region")
     private RegionDTO region;
-    @Column(name = "screening_schedule")
+    @Column(name = "screeningSchedule")
     private String ScreeningSchedule;
 
     public CinemaMovieDTO(UUID id, UUID cinemaId, CinemaDTO cinema, UUID movieId, MovieDTO movie, UUID regionId, RegionDTO region, String screeningSchedule) {

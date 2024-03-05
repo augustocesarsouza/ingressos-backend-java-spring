@@ -1,5 +1,6 @@
 package com.backend.ingresso.dataTest.repositories;
 
+import com.backend.ingresso.application.dto.CinemaMovieDTO;
 import com.backend.ingresso.data.context.CinemaMovieRepositoryJPA;
 import com.backend.ingresso.data.repositories.CinemaMovieRepository;
 import com.backend.ingresso.data.repositories.CinemaRepository;
@@ -39,7 +40,7 @@ public class CinemaMovieRepositoryTest {
         when(cinemaMovieRepositoryJPA.getByRegionCinemaIdAndMovieId(any(), any()))
                 .thenReturn(new ArrayList<>());
 
-        List<CinemaMovie> movie = cinemaMovieRepository.getByRegionCinemaIdAndMovieId(
+        List<CinemaMovieDTO> movie = cinemaMovieRepository.getByRegionCinemaIdAndMovieId(
                 UUID.fromString(regionId),UUID.fromString(movieId));
 
         assertNotNull(movie);
@@ -53,7 +54,7 @@ public class CinemaMovieRepositoryTest {
         when(cinemaMovieRepositoryJPA.getByRegionCinemaIdAndMovieId(any(), any()))
                 .thenReturn(null);
 
-        List<CinemaMovie> movie = cinemaMovieRepository.getByRegionCinemaIdAndMovieId(
+        List<CinemaMovieDTO> movie = cinemaMovieRepository.getByRegionCinemaIdAndMovieId(
                 UUID.fromString(regionId),UUID.fromString(movieId));
 
         assertNull(movie);

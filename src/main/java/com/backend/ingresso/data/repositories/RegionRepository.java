@@ -28,6 +28,11 @@ public class RegionRepository implements IRegionRepository {
     }
 
     @Override
+    public Region getRegionIdByCity(String city) {
+        return regionRepositoryJPA.getRegionIdByCity(city);
+    }
+
+    @Override
     public Region create(Region region) {
         if(region == null)
             return null;
