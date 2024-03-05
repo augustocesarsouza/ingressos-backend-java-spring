@@ -47,6 +47,8 @@ public class Movie {
     private List<MovieTheater> movieTheaters;
     @OneToMany(mappedBy = "movie", cascade = CascadeType.REMOVE)
     private List<MovieRegionTicketsPurchesed> movieRegionTicketsPurcheseds;
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.REMOVE)
+    private List<CinemaMovie> cinemaMovies;
     //O parâmetro mappedBy = "movie" especifica que a propriedade movie na classe MovieTheater é responsável por mapear essa relação.
 
     public Movie(UUID id, String title, String description, String gender, String duration, Integer movieRating,

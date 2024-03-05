@@ -19,6 +19,8 @@ public class Region {
     @Column(name = "city")
     @JsonProperty("city")
     private String City;
+    @OneToMany(mappedBy = "region", cascade = CascadeType.REMOVE)
+    private List<CinemaMovie> cinemaMovies;
 
     public Region(UUID id, String state, String city) {
         Id = id;

@@ -24,6 +24,8 @@ public class Cinema {
     private String Ranking;
     @OneToMany(mappedBy = "cinema", cascade = CascadeType.REMOVE)
     private List<MovieRegionTicketsPurchesed> movieRegionTicketsPurcheseds;
+    @OneToMany(mappedBy = "cinema", cascade = CascadeType.REMOVE)
+    private List<CinemaMovie> cinemaMovies;
 
     public Cinema(UUID id, String nameCinema, String district, String ranking) {
         Id = id;
