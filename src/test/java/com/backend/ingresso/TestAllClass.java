@@ -1,14 +1,12 @@
 package com.backend.ingresso;
 
-import com.backend.ingresso.applicationTest.MovieServiceTest;
-import com.backend.ingresso.applicationTest.MovieTheaterServiceTest;
-import com.backend.ingresso.applicationTest.RegionServiceTest;
-import com.backend.ingresso.applicationTest.TheatreServiceTest;
+import com.backend.ingresso.applicationTest.*;
 import com.backend.ingresso.applicationTest.userServiceTest.UserAuthenticationServiceTest;
 import com.backend.ingresso.applicationTest.userServiceTest.UserConfirmationServiceTest;
 import com.backend.ingresso.applicationTest.userServiceTest.UserManagementServiceTest;
 import com.backend.ingresso.applicationTest.utilTest.BCryptPasswordEncoderUtilTest;
 import com.backend.ingresso.applicationTest.utilTest.DictionaryCodeTest;
+import com.backend.ingresso.data.repositories.MovieRegionTicketsPurchesedRepository;
 import com.backend.ingresso.dataTest.authenticationTest.TokenGeneratorTest;
 import com.backend.ingresso.dataTest.repositories.*;
 import com.backend.ingresso.dataTest.utilityExternalTest.SendEmailBrevoTest;
@@ -25,6 +23,7 @@ import org.junit.platform.suite.api.Suite;
         SendEmailBrevoTest.class,SendEmailUserTest.class, UserTest.class, MovieServiceTest.class,
         RegionRepositoryTest.class, RegionServiceTest.class, MovieTheaterRepositoryTest.class,
         MovieTheaterServiceTest.class, TheatreRepositoryTest.class,
-        TheatreServiceTest.class})
+        TheatreServiceTest.class, MovieRegionTicketsPurchesedRepository.class,
+        MovieRegionTicketsPurchesedServiceTest.class})
 public class TestAllClass {
 }
