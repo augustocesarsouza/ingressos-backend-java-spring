@@ -1,5 +1,6 @@
 package com.backend.ingresso.application.services;
 
+import com.backend.ingresso.application.ErrorValidation;
 import com.backend.ingresso.application.dto.FormOfPaymentDTO;
 import com.backend.ingresso.application.dto.MovieDTO;
 import com.backend.ingresso.application.dto.validateErrosDTOs.IValidateErrorsDTO;
@@ -47,14 +48,15 @@ public class FormOfPaymentService implements IFormOfPaymentService {
     @Override
     public ResultService<FormOfPaymentDTO> create(FormOfPaymentCreate formOfPaymentCreate, BindingResult result) {
         if(formOfPaymentCreate == null)
-            return null;
+            return ResultService.Fail("error DTO Create null");
 
         if(result.hasErrors()){
             var errorsDTO = result.getAllErrors();
-            var errors = validateErrorsDTO.ValidateDTO(errorsDTO);
+            List<ErrorValidation> errors = validateErrorsDTO.ValidateDTO(errorsDTO);
 
             return ResultService.RequestError("error validate DTO", errors);
         }
+
         try {
             if(!ValidateUUID.Validate(formOfPaymentCreate.getMovieId()))
                 return ResultService.Fail("error movieId, not is UUID valid");
