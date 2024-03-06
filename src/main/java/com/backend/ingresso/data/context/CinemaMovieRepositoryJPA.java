@@ -4,10 +4,12 @@ import com.backend.ingresso.application.dto.CinemaMovieDTO;
 import com.backend.ingresso.domain.entities.CinemaMovie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.UUID;
 
+@Repository
 public interface CinemaMovieRepositoryJPA extends JpaRepository<CinemaMovie, UUID> {
     //CinemaMovie(UUID id, UUID cinemaId, Cinema cinema, UUID movieId, Movie movie, UUID regionId, Region region, String screeningSchedule)
     //CinemaMovie(cm.Id, cm.CinemaId, null, cm.MovieId, null, cm.RegionId, null, cm.ScreeningSchedule)

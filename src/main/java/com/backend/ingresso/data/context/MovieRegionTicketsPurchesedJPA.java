@@ -3,9 +3,11 @@ package com.backend.ingresso.data.context;
 import com.backend.ingresso.domain.entities.MovieRegionTicketsPurchesed;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
+@Repository
 public interface MovieRegionTicketsPurchesedJPA extends JpaRepository<MovieRegionTicketsPurchesed, UUID> {
     //MovieRegionTicketsPurchesed(UUID id, String ticketsSeats, UUID movieId, Movie movie, UUID cinemaId, Cinema cinema)
 
