@@ -5,7 +5,6 @@ import com.backend.ingresso.application.dto.*;
 import com.backend.ingresso.application.dto.validateErrosDTOs.IValidateErrorsDTO;
 import com.backend.ingresso.application.dto.validations.formOfPaymentDTOs.FormOfPaymentCreate;
 import com.backend.ingresso.application.mappings.MappingClassInterface.IFormOfPaymentMapper;
-import com.backend.ingresso.application.services.CinemaMovieService;
 import com.backend.ingresso.application.services.FormOfPaymentService;
 import com.backend.ingresso.application.services.ResultService;
 import com.backend.ingresso.application.services.interfaces.IMovieService;

@@ -26,6 +26,6 @@ import org.junit.platform.suite.api.Suite;
         TheatreServiceTest.class, MovieRegionTicketsPurchesedRepository.class,
         MovieRegionTicketsPurchesedServiceTest.class, CinemaMovieRepositoryTest.class,
         CinemaMovieServiceTest.class, FormOfPaymentServiceTest.class,
-        AdditionalFoodMovieRepositoryTest.class})
+        AdditionalFoodMovieRepositoryTest.class, AdditionalFoodMovieServiceTest.class})
 public class TestAllClass {
 }
