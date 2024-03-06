@@ -20,12 +20,12 @@ public class FormOfPayment {
     private String Price;
     @Column(name = "movie_id")
     @JsonProperty("movieId")
-    private String MovieId;
+    private UUID MovieId;
     @ManyToOne
     @JoinColumn(name = "movie_id", insertable = false, updatable = false)
     private Movie movie;
 
-    public FormOfPayment(UUID id, String formName, String price, String movieId, Movie movie) {
+    public FormOfPayment(UUID id, String formName, String price, UUID movieId, Movie movie) {
         Id = id;
         FormName = formName;
         Price = price;
@@ -48,7 +48,7 @@ public class FormOfPayment {
         return Price;
     }
 
-    public String getMovieId() {
+    public UUID getMovieId() {
         return MovieId;
     }
 

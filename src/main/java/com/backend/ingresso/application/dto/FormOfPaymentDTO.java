@@ -14,10 +14,10 @@ public class FormOfPaymentDTO {
     @JsonProperty("price")
     private String Price;
     @JsonProperty("movieId")
-    private String MovieId;
+    private UUID MovieId;
     private MovieDTO movieDTO;
 
-    public FormOfPaymentDTO(UUID id, String formName, String price, String movieId, MovieDTO movieDTO) {
+    public FormOfPaymentDTO(UUID id, String formName, String price, UUID movieId, MovieDTO movieDTO) {
         Id = id;
         FormName = formName;
         Price = price;
@@ -40,7 +40,7 @@ public class FormOfPaymentDTO {
         return Price;
     }
 
-    public String getMovieId() {
+    public UUID getMovieId() {
         return MovieId;
     }
 
