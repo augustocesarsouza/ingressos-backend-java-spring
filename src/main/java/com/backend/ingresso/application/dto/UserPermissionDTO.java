@@ -1,10 +1,11 @@
 package com.backend.ingresso.application.dto;
 
-import com.backend.ingresso.domain.entities.User;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.UUID;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserPermissionDTO {
     @JsonProperty("id")
     private UUID Id;
@@ -33,6 +34,9 @@ public class UserPermissionDTO {
         Id = id;
         UserId = userId;
         this.permissionDTO = permissionDTO;
+    }
+
+    public UserPermissionDTO() {
     }
 
     public UUID getId() {

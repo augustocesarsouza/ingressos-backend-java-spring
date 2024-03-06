@@ -1,10 +1,12 @@
 package com.backend.ingresso.application.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 
 import java.util.UUID;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CinemaMovieDTO {
     @JsonProperty("id")
     private UUID Id;

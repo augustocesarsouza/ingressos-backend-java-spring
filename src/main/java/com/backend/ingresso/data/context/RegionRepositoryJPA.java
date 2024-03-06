@@ -14,6 +14,10 @@ public interface RegionRepositoryJPA extends JpaRepository<Region, UUID> {
     //Region(r.Id, r.State, r.City)
     @Query("SELECT new com.backend.ingresso.domain.entities." +
             "Region(r.Id, null, null) " +
+            "FROM Region AS r WHERE r.Id = :regionId")
+    Region getCheckIfRegionExistsById(UUID regionId);
+    @Query("SELECT new com.backend.ingresso.domain.entities." +
+            "Region(r.Id, null, null) " +
             "FROM Region AS r WHERE r.City = :city")
     Region getRegionIdByCityName(String city);
 

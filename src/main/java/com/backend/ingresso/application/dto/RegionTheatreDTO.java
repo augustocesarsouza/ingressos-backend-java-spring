@@ -1,9 +1,11 @@
 package com.backend.ingresso.application.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.UUID;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class RegionTheatreDTO {
     @JsonProperty("id")
     private UUID Id;

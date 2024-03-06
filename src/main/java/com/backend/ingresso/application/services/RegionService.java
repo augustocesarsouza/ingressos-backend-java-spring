@@ -31,6 +31,21 @@ public class RegionService implements IRegionService {
 
     @Override
     @Transactional
+    public ResultService<RegionDTO> getCheckIfRegionExistsById(UUID regionId) {
+        try {
+            Region region = regionRepository.getCheckIfRegionExistsById(regionId);
+
+            if(region == null)
+                return ResultService.Fail("not found region");
+
+            return ResultService.Ok(regionMapper.regionToRegionDto(region));
+        }catch (Exception ex){
+            return ResultService.Fail(ex.getMessage());
+        }
+    }
+
+    @Override
+    @Transactional
     public ResultService<RegionDTO> getRegionIdByCityName(String city) {
         try {
             Region regionDTO = regionRepository.getRegionIdByCityName(city);

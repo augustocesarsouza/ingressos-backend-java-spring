@@ -15,8 +15,9 @@ public interface CinemaMovieRepositoryJPA extends JpaRepository<CinemaMovie, UUI
 
     //Cinema(UUID id, String nameCinema, String district, String ranking)
     @Query("SELECT new com.backend.ingresso.application.dto." +
-            "CinemaMovieDTO(null, null, new com.backend.ingresso.domain.entities.CinemaDTO(cm.Cinema.Id, cm.Cinema.NameCinema, cm.Cinema.District, cm.Cinema.Ranking)" +
+            "CinemaMovieDTO(null, null, new com.backend.ingresso.application.dto.CinemaDTO(c.Id, c.NameCinema, c.District, c.Ranking)" +
             ", null, null, null, null, cm.ScreeningSchedule) " +
-            "FROM CinemaMovie AS cm WHERE cm.RegionId = :regionId AND cm.MovieId = :movieId")
+            "FROM CinemaMovie AS cm INNER JOIN Cinema AS c ON cm.CinemaId = c.Id " +
+            "WHERE cm.RegionId = :regionId AND cm.MovieId = :movieId")
     List<CinemaMovieDTO> getByRegionCinemaIdAndMovieId(UUID regionId, UUID movieId);
 }

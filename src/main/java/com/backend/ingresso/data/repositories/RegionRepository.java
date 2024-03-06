@@ -8,6 +8,8 @@ import com.backend.ingresso.domain.repositories.IRegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 public class RegionRepository implements IRegionRepository {
     private final RegionRepositoryJPA regionRepositoryJPA;
@@ -15,6 +17,11 @@ public class RegionRepository implements IRegionRepository {
     @Autowired
     public RegionRepository(RegionRepositoryJPA regionRepositoryJPA) {
         this.regionRepositoryJPA = regionRepositoryJPA;
+    }
+
+    @Override
+    public Region getCheckIfRegionExistsById(UUID regionId) {
+        return regionRepositoryJPA.getCheckIfRegionExistsById(regionId);
     }
 
     @Override

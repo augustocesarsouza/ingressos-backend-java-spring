@@ -1,5 +1,6 @@
 package com.backend.ingresso.application.services;
 
+import com.backend.ingresso.application.ErrorValidation;
 import com.backend.ingresso.application.dto.CinemaDTO;
 import com.backend.ingresso.application.dto.CinemaMovieDTO;
 import com.backend.ingresso.application.dto.MovieDTO;
@@ -13,6 +14,7 @@ import com.backend.ingresso.application.services.interfaces.IMovieService;
 import com.backend.ingresso.application.services.interfaces.IRegionService;
 import com.backend.ingresso.application.util.ValidateUUID;
 import com.backend.ingresso.domain.entities.CinemaMovie;
+import com.backend.ingresso.domain.entities.Region;
 import com.backend.ingresso.domain.repositories.ICinemaMovieRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,27 +48,32 @@ public class CinemaMovieService implements ICinemaMovieService {
     @Override
     @Transactional
     public ResultService<List<CinemaMovieDTO>> getByRegionCinemaIdAndMovieId(String region, UUID movieId) {
-        ResultService<RegionDTO> regionOnlyId = regionService.getRegionIdByCity(region);
+        try {
+            ResultService<RegionDTO> regionOnlyId = regionService.getRegionIdByCity(region);
 
-        if(!regionOnlyId.IsSuccess)
-            return ResultService.Fail("error region not found");
+            if(!regionOnlyId.IsSuccess)
+                return ResultService.Fail("error region not found");
 
-        RegionDTO regionDto = regionOnlyId.Data;
+            RegionDTO regionDto = regionOnlyId.Data;
 
-        List<CinemaMovieDTO> cinemaMovieDTOS = cinemaMovieRepository.getByRegionCinemaIdAndMovieId(regionDto.getId(), movieId);
+            List<CinemaMovieDTO> cinemaMovieDTOS = cinemaMovieRepository.getByRegionCinemaIdAndMovieId(regionDto.getId(), movieId);
 
-        return ResultService.Ok(cinemaMovieDTOS);
+            return ResultService.Ok(cinemaMovieDTOS);
+
+        }catch (Exception ex){
+            return ResultService.Fail(ex.getMessage());
+        }
     }
 
     @Override
     @Transactional
     public ResultService<CinemaMovieDTO> create(CinemaMovieCreate cinemaMovieDTO, BindingResult result) {
         if(cinemaMovieDTO == null)
-            return ResultService.Fail("error DTO Null");
+            return ResultService.Fail("error DTO Create Null");
 
         if(result.hasErrors()){
             var errorsDTO = result.getAllErrors();
-            var errors = validateErrorsDTO.ValidateDTO(errorsDTO);
+            List<ErrorValidation> errors = validateErrorsDTO.ValidateDTO(errorsDTO);
 
             return ResultService.RequestError("error validate DTO", errors);
         }
@@ -80,8 +87,12 @@ public class CinemaMovieService implements ICinemaMovieService {
             if(!ValidateUUID.Validate(cinemaMovieDTO.getCinemaId()))
                 return ResultService.Fail("error cinemaId, not is UUID valid");
 
+            if(!ValidateUUID.Validate(cinemaMovieDTO.getRegionId()))
+                return ResultService.Fail("error regionId, not is UUID valid");
+
             UUID movieId = UUID.fromString(cinemaMovieDTO.getMovieId());
             UUID cinemaId = UUID.fromString(cinemaMovieDTO.getCinemaId());
+            UUID regionId = UUID.fromString(cinemaMovieDTO.getRegionId());
 
             ResultService<MovieDTO> movieDTO = movieService.getCheckIfMovieExistsById(movieId);
 
@@ -93,15 +104,22 @@ public class CinemaMovieService implements ICinemaMovieService {
             if(!cinemaDTO.IsSuccess)
                 return ResultService.Fail("error cinema not exist");
 
+            ResultService<RegionDTO> regionDTO = regionService.getCheckIfRegionExistsById(regionId);
+
+            if(!regionDTO.IsSuccess)
+                return ResultService.Fail("error region not exist");
+
             CinemaMovie cinemaMovie = new CinemaMovie(id, cinemaId, null,
-                    movieId, null, null, null, cinemaMovieDTO.getScreeningSchedule());
+                    movieId, null, regionId, null, cinemaMovieDTO.getScreeningSchedule());
 
             CinemaMovie resultCreate = cinemaMovieRepository.create(cinemaMovie);
 
             if(resultCreate == null)
                 return ResultService.Fail("error create repository");
 
-            return ResultService.Ok(cinemaMovieMapper.cinemaMovieToCinemaMovieDto(resultCreate));
+            CinemaMovieDTO cinemaMovieDTO1 = cinemaMovieMapper.cinemaMovieToCinemaMovieDto(resultCreate);
+
+            return ResultService.Ok(cinemaMovieDTO1);
 
         }catch (Exception ex){
             return ResultService.Fail(ex.getMessage());
