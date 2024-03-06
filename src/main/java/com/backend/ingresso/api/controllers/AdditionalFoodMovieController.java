@@ -1,8 +1,6 @@
 package com.backend.ingresso.api.controllers;
 
 import com.backend.ingresso.application.dto.AdditionalFoodMovieDTO;
-import com.backend.ingresso.application.dto.AdditionalInfoUserDTO;
-import com.backend.ingresso.application.dto.validations.AdditionalInfoUserValidationDTOs.AdditionalInfoUserCreateDTO;
 import com.backend.ingresso.application.dto.validations.additionalFoodMovieDTOs.AdditionalFoodMovieCreate;
 import com.backend.ingresso.application.services.AdditionalFoodMovieService;
 import com.backend.ingresso.application.services.ResultService;
@@ -28,7 +26,7 @@ public class AdditionalFoodMovieController {
         this.additionalFoodMovieService = additionalFoodMovieService;
     }
 
-    @GetMapping("/public/additionalfoodmovie/getallfood/{movieId}}")
+    @GetMapping("/public/additionalfoodmovie/getallfood/{movieId}")
     public ResponseEntity<ResultService<List<AdditionalFoodMovieDTO>>> getAllFoodMovie(@PathVariable String movieId) {
         var result = additionalFoodMovieService.getAllFoodMovie(UUID.fromString(movieId));
 
