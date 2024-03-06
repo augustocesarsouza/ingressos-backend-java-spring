@@ -72,7 +72,7 @@ public class FormOfPaymentService implements IFormOfPaymentService {
             FormOfPayment formOfPayment = new FormOfPayment(id, formOfPaymentCreate.getFormName(),
                     formOfPaymentCreate.getPrice(), UUID.fromString(formOfPaymentCreate.getMovieId()), null);
 
-            FormOfPayment formOfPaymentRepoCreate = formOfPaymentRepository.create(formOfPayment);
+                FormOfPayment formOfPaymentRepoCreate = formOfPaymentRepository.create(formOfPayment);
 
             if(formOfPaymentRepoCreate == null)
                 return ResultService.Fail("error create repository");
