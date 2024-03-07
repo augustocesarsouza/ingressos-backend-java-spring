@@ -15,6 +15,7 @@ import java.util.UUID;
 
 @Component
 @RestController
+@CrossOrigin
 @RequestMapping("/v1")
 public class CinemaController {
     private final ICinemaService cinemaService;
@@ -24,7 +25,7 @@ public class CinemaController {
         this.cinemaService = cinemaService;
     }
 
-    @PostMapping("/public/cinema/create")
+    @PostMapping("/cinema/create")
     public ResponseEntity<ResultService<CinemaDTO>> create(@Valid @RequestBody CinemaCreateDTO cinemaCreateDTO, BindingResult resultValid){
         var result = cinemaService.create(cinemaCreateDTO, resultValid);
 
@@ -35,7 +36,7 @@ public class CinemaController {
         return ResponseEntity.badRequest().body(result);
     }
 
-    @DeleteMapping("/public/cinema/delete/{cinemaId}")
+    @DeleteMapping("/cinema/delete/{cinemaId}")
     public ResponseEntity<ResultService<CinemaDTO>> create(@PathVariable String cinemaId){
         var result = cinemaService.delete(UUID.fromString(cinemaId));
 

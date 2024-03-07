@@ -18,6 +18,7 @@ import java.util.UUID;
 
 @Component
 @RestController
+@CrossOrigin
 @RequestMapping("/v1")
 public class FormOfPaymentController {
     private final FormOfPaymentService formOfPaymentService;
@@ -27,7 +28,7 @@ public class FormOfPaymentController {
         this.formOfPaymentService = formOfPaymentService;
     }
 
-    @GetMapping("/public/form-of-payment/get-form/{movieId}")
+    @GetMapping("/form-of-payment/get-form/{movieId}")
     public ResponseEntity<ResultService<List<FormOfPaymentDTO>>> getMovieIdInfo(@PathVariable String movieId){
         var result = formOfPaymentService.getMovieIdInfo(UUID.fromString(movieId));
 
@@ -38,7 +39,7 @@ public class FormOfPaymentController {
         return ResponseEntity.badRequest().body(result);
     }
 
-    @PostMapping("/public/form-of-payment/create")
+    @PostMapping("/form-of-payment/create")
     public ResponseEntity<ResultService<FormOfPaymentDTO>> create(@Valid @RequestBody FormOfPaymentCreate formOfPaymentCreate, BindingResult resultValid){
         var result = formOfPaymentService.create(formOfPaymentCreate, resultValid);
 

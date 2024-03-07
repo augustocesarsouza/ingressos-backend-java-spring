@@ -24,7 +24,7 @@ public class TheatreRepository implements ITheatreRepository {
         if(theatreId == null)
             return null;
 
-        return theatreRepositoryJPA.getByTheatreId(theatreId);
+        return theatreRepositoryJPA.getByTheatreId(theatreId).stream().findFirst().orElse(null);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class TheatreRepository implements ITheatreRepository {
         if(theatreId == null)
             return null;
 
-        return theatreRepositoryJPA.getByTheatreIdIdPublicId(theatreId);
+        return theatreRepositoryJPA.getByTheatreIdIdPublicId(theatreId).stream().findFirst().orElse(null);
     }
 
     @Override

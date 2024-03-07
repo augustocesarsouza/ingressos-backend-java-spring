@@ -19,7 +19,7 @@ public class CinemaRepository implements ICinemaRepository {
 
     @Override
     public Cinema getById(UUID cinemaId) {
-        return cinemaRepositoryJPA.getCinemaById_Info_Id(cinemaId);
+        return cinemaRepositoryJPA.getCinemaById_Info_Id(cinemaId).stream().findFirst().orElse(null);
     }
 
     @Override

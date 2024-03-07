@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -15,18 +16,19 @@ public interface RegionRepositoryJPA extends JpaRepository<Region, UUID> {
     @Query("SELECT new com.backend.ingresso.domain.entities." +
             "Region(r.Id, null, null) " +
             "FROM Region AS r WHERE r.Id = :regionId")
-    Region getCheckIfRegionExistsById(UUID regionId);
+    List<Region> getCheckIfRegionExistsById(UUID regionId);
     @Query("SELECT new com.backend.ingresso.domain.entities." +
             "Region(r.Id, null, null) " +
             "FROM Region AS r WHERE r.City = :city")
-    Region getRegionIdByCityName(String city);
+    List<Region> getRegionIdByCityName(String city);
 
     @Query("SELECT new com.backend.ingresso.domain.entities." +
             "Region(r.Id, null, null) " +
             "FROM Region AS r WHERE r.State = :state")
-    Region getIdByNameState(String state);
+    List<Region> getIdByNameState(String state);
+
     @Query("SELECT new com.backend.ingresso.domain.entities." +
             "Region(r.Id, null, null) " +
             "FROM Region AS r WHERE r.City = :city")
-    Region getRegionIdByCity(String city);
+    List<Region> getRegionIdByCity(String city);
 }

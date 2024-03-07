@@ -21,22 +21,22 @@ public class MovieRepository implements IMovieRepository {
 
     @Override
     public Movie getById(UUID movieId) {
-        return movieRepositoryJPA.getMovieById_Info_Id_Title(movieId);
+        return movieRepositoryJPA.getMovieById_Info_Id_Title(movieId).stream().findFirst().orElse(null);
     }
 
     @Override
     public Movie getInfoMoviesById(UUID movieId) {
-        return movieRepositoryJPA.getMovieById(movieId);
+        return movieRepositoryJPA.getMovieById(movieId).stream().findFirst().orElse(null);
     }
 
     @Override
     public Movie getStatusMovie(String statusMovie) {
-        return movieRepositoryJPA.getMovieByStatusMovie(statusMovie);
+        return movieRepositoryJPA.getMovieByStatusMovie(statusMovie).stream().findFirst().orElse(null);
     }
 
     @Override
     public Movie getMovieByIdForDelete(UUID movieId) {
-        return movieRepositoryJPA.getMovieByIdForDelete(movieId);
+        return movieRepositoryJPA.getMovieByIdForDelete(movieId).stream().findFirst().orElse(null);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class MovieRepository implements IMovieRepository {
 
     @Override
     public Movie getMovieByTitle(String title) {
-        return movieRepositoryJPA.getMovieByTitle(title);
+        return movieRepositoryJPA.getMovieByTitle(title).stream().findFirst().orElse(null);
     }
 
     @Override

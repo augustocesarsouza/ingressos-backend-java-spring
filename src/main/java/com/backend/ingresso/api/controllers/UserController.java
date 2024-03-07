@@ -26,6 +26,7 @@ import java.util.UUID;
 
 @Component
 @RestController
+@CrossOrigin
 @RequestMapping("/v1")
 public class UserController {
     private final IUserManagementService userManagementService;

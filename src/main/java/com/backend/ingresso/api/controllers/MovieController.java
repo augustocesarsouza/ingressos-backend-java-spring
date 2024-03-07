@@ -17,6 +17,7 @@ import java.util.UUID;
 
 @Component
 @RestController
+@CrossOrigin
 @RequestMapping("/v1")
 public class MovieController {
     private final IMovieService movieService;
@@ -37,7 +38,7 @@ public class MovieController {
         return ResponseEntity.badRequest().body(result);
     }
 
-    @GetMapping("/public/movie/info/{movieId}")
+    @GetMapping("/movie/info/{movieId}")
     public ResponseEntity<ResultService<MovieDTO>> getInfoMoviesById(@PathVariable String movieId){
         var result = movieService.getInfoMoviesById(UUID.fromString(movieId));
 
@@ -59,7 +60,7 @@ public class MovieController {
         return ResponseEntity.badRequest().body(result);
     }
 
-    @PostMapping("/public/movie/create")
+    @PostMapping("/movie/create")
     public ResponseEntity<ResultService<MovieDTO>> create(@Valid @RequestBody MovieCreateValidatorDTO movieCreateValidatorDTO, BindingResult resultValid){
         var result = movieService.create(movieCreateValidatorDTO, resultValid);
 
@@ -70,7 +71,7 @@ public class MovieController {
         return ResponseEntity.badRequest().body(result);
     }
 
-    @PutMapping("/public/movie/update-img")
+    @PutMapping("/movie/update-img")
     public ResponseEntity<ResultService<MovieDTO>> updateImg(@Valid @RequestBody MovieUpdateValidatorDTO movieUpdateValidatorDTO, BindingResult resultValid){
         var result = movieService.updateMovieImg(movieUpdateValidatorDTO, resultValid);
 
@@ -81,7 +82,7 @@ public class MovieController {
         return ResponseEntity.badRequest().body(result);
     }
 
-    @DeleteMapping("/public/movie/delete/{idMovie}")
+    @DeleteMapping("/movie/delete/{idMovie}")
     public ResponseEntity<ResultService<MovieDTO>> delete(@PathVariable String idMovie){
         var result = movieService.deleteMovie(UUID.fromString(idMovie));
 

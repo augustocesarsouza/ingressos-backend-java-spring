@@ -19,6 +19,7 @@ import java.util.UUID;
 
 @Component
 @RestController
+@CrossOrigin
 @RequestMapping("/v1")
 public class MovieRegionTicketsPurchesedController {
     private final IMovieRegionTicketsPurchesedService movieRegionTicketsPurchesedService;
@@ -28,7 +29,7 @@ public class MovieRegionTicketsPurchesedController {
         this.movieRegionTicketsPurchesedService = movieRegionTicketsPurchesedService;
     }
 
-    @GetMapping("/public/movie-region-tickets/get-by-movieid-and-cinemaid/{movieId}/{cinemaId}")
+    @GetMapping("/movie-region-tickets/get-by-movieid-and-cinemaid/{movieId}/{cinemaId}")
     public ResponseEntity<ResultService<MovieRegionTicketsPurchesedDTO>> getAllMovieByRegionId(@PathVariable String movieId, @PathVariable String cinemaId){
         var result = movieRegionTicketsPurchesedService.getByMovieIdAndCinemaId(UUID.fromString(movieId), UUID.fromString(cinemaId));
 
@@ -39,7 +40,7 @@ public class MovieRegionTicketsPurchesedController {
         return ResponseEntity.badRequest().body(result);
     }
 
-    @PostMapping("/public/movie-region-tickets/create")
+    @PostMapping("/movie-region-tickets/create")
     public ResponseEntity<ResultService<MovieRegionTicketsPurchesedDTO>> create(
             @Valid @RequestBody MovieRegionTicketsPurchesedCreateDTO movieRegionTicketsPurchesedCreateDTO, BindingResult resultValid){
         var result = movieRegionTicketsPurchesedService.create(movieRegionTicketsPurchesedCreateDTO, resultValid);
@@ -51,7 +52,7 @@ public class MovieRegionTicketsPurchesedController {
         return ResponseEntity.badRequest().body(result);
     }
 
-    @PutMapping("/public/movie-region-tickets/update")
+    @PutMapping("/movie-region-tickets/update")
     public ResponseEntity<ResultService<MovieRegionTicketsPurchesedDTO>> update(
             @Valid @RequestBody MovieRegionTicketsPurchesedUpdateDTO movieRegionTicketsPurchesedUpdateDTO, BindingResult resultValid){
         var result = movieRegionTicketsPurchesedService.updateTicketsSeats(movieRegionTicketsPurchesedUpdateDTO, resultValid);

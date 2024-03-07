@@ -19,12 +19,12 @@ public class MovieRegionTicketsPurchesedRepository implements IMovieRegionTicket
 
     @Override
     public MovieRegionTicketsPurchesed getByMovieIdAndCinemaId(UUID movieId, UUID cinemaId) {
-        return movieRegionTicketsPurchesedJPA.getByMovieIdAndCinemaId(movieId, cinemaId);
+        return movieRegionTicketsPurchesedJPA.getByMovieIdAndCinemaId(movieId, cinemaId).stream().findFirst().orElse(null);
     }
 
     @Override
     public MovieRegionTicketsPurchesed getByMovieIdAndCinemaIdAndIdTicketsSeats(UUID movieId, UUID cinemaId){
-        return movieRegionTicketsPurchesedJPA.getByMovieIdAndCinemaIdAndIdTicketsSeats(movieId, cinemaId);
+        return movieRegionTicketsPurchesedJPA.getByMovieIdAndCinemaIdAndIdTicketsSeats(movieId, cinemaId).stream().findFirst().orElse(null);
     }
 
     @Override

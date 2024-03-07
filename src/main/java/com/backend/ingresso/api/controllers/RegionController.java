@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Component
 @RestController
+@CrossOrigin
 @RequestMapping("/v1")
 public class RegionController {
     private final RegionService regionService;
@@ -23,7 +24,7 @@ public class RegionController {
         this.regionService = regionService;
     }
 
-    @GetMapping("/public/region/by-name-city/{state}")
+    @GetMapping("/region/by-name-city/{state}")
     public ResponseEntity<ResultService<RegionDTO>> getIdByNameState(@PathVariable String state){
         var result = regionService.getIdByNameState(state);
 
@@ -34,7 +35,7 @@ public class RegionController {
         return ResponseEntity.badRequest().body(result);
     }
 
-    @PostMapping("/public/region/create")
+    @PostMapping("/region/create")
     public ResponseEntity<ResultService<RegionDTO>> create(@Valid @RequestBody RegionDTO regionDTO, BindingResult resultValid){
         var result = regionService.create(regionDTO, resultValid);//fazer
 

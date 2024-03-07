@@ -105,6 +105,7 @@ public class UserAuthenticationService implements IUserAuthenticationService {
         dictionaryCode.putKeyValueDictionary(userAuth.getId().toString(), randomCode);
         //InfoErrors<String> resultSendCodeEmail = sendEmailUser.sendCodeRandom(userAuth, randomCode);
 
+        userAuth.setName(user.getName());
         UserDTO userDTO = userMapper.userToUserDto(userAuth);
 
         if(userDTO == null)
@@ -120,12 +121,14 @@ public class UserAuthenticationService implements IUserAuthenticationService {
     @Override
     @Transactional
     public ResultService<String> verify(int code, String guidId) {
-        if(dictionaryCode.getKeyDictionary(guidId) == code){
-            dictionaryCode.removeKeyDictionary(guidId);
-            return ResultService.Ok("ok confirmed");
-        }else {
-            return ResultService.Fail("error when confirming code");
-        }
+        //Descomentar depois quando for mandar CODIGO para Email
+//        if(dictionaryCode.getKeyDictionary(guidId) == code){
+//            dictionaryCode.removeKeyDictionary(guidId);
+//            return ResultService.Ok("ok confirmed");
+//        }else {
+//            return ResultService.Fail("error when confirming code");
+//        }
+        return ResultService.Ok("ok confirmed");
     }
 
     @Override

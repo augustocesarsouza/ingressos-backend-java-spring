@@ -21,22 +21,22 @@ public class RegionRepository implements IRegionRepository {
 
     @Override
     public Region getCheckIfRegionExistsById(UUID regionId) {
-        return regionRepositoryJPA.getCheckIfRegionExistsById(regionId);
+        return regionRepositoryJPA.getCheckIfRegionExistsById(regionId).stream().findFirst().orElse(null);
     }
 
     @Override
     public Region getRegionIdByCityName(String city) {
-        return regionRepositoryJPA.getRegionIdByCityName(city);
+        return regionRepositoryJPA.getRegionIdByCityName(city).stream().findFirst().orElse(null);
     }
 
     @Override
     public Region getIdByNameState(String state) {
-        return regionRepositoryJPA.getIdByNameState(state);
+        return regionRepositoryJPA.getIdByNameState(state).stream().findFirst().orElse(null);
     }
 
     @Override
     public Region getRegionIdByCity(String city) {
-        return regionRepositoryJPA.getRegionIdByCity(city);
+        return regionRepositoryJPA.getRegionIdByCity(city).stream().findFirst().orElse(null);
     }
 
     @Override

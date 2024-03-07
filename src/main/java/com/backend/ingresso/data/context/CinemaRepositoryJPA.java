@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -13,5 +14,5 @@ public interface CinemaRepositoryJPA extends JpaRepository<Cinema, UUID> {
     @Query("SELECT new com.backend.ingresso.domain.entities." +
             "Cinema(c.Id, null, null, null) " +
             "FROM Cinema AS c WHERE c.Id = :cinemaId")
-    Cinema getCinemaById_Info_Id(UUID cinemaId);
+    List<Cinema> getCinemaById_Info_Id(UUID cinemaId);
 }

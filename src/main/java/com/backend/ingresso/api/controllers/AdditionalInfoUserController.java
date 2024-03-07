@@ -12,6 +12,7 @@ import java.text.ParseException;
 
 @Component
 @RestController
+@CrossOrigin
 @RequestMapping("/v1")
 public class AdditionalInfoUserController {
     private final IAdditionalInfoUserService additionalInfoUserService;

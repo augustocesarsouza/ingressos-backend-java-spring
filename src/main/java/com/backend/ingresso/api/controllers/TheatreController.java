@@ -20,6 +20,7 @@ import java.util.UUID;
 
 @Component
 @RestController
+@CrossOrigin
 @RequestMapping("/v1")
 public class TheatreController {
     private final ITheatreService theatreService;
@@ -40,7 +41,7 @@ public class TheatreController {
         return ResponseEntity.badRequest().body(result);
     }
 
-    @PostMapping("/public/theatre/create")
+    @PostMapping("/theatre/create")
     public ResponseEntity<ResultService<TheatreDTO>> create(@Valid @RequestBody TheatreCreateValidatorDTO theatreCreateValidatorDTO, BindingResult resultValid){
         var result = theatreService.create(theatreCreateValidatorDTO, resultValid);
 
@@ -51,7 +52,7 @@ public class TheatreController {
         return ResponseEntity.badRequest().body(result);
     }
 
-    @DeleteMapping("/public/theatre/delete/{idTheatre}")
+    @DeleteMapping("/theatre/delete/{idTheatre}")
     public ResponseEntity<ResultService<TheatreDTO>> delete(@PathVariable String idTheatre){
         var result = theatreService.deleteTheatre(idTheatre);
 
@@ -62,7 +63,7 @@ public class TheatreController {
         return ResponseEntity.badRequest().body(result);
     }
 
-    @PutMapping("/public/theatre/update")
+    @PutMapping("/theatre/update")
     public ResponseEntity<ResultService<TheatreDTO>> updateImg(@Valid @RequestBody TheatreUpdateValidatorDTO theatreUpdateValidatorDTO, BindingResult resultValid){
         var result = theatreService.updateImgTheatre(theatreUpdateValidatorDTO, resultValid);
 

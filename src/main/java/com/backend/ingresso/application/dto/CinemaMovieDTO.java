@@ -12,27 +12,27 @@ public class CinemaMovieDTO {
     private UUID Id;
     @JsonProperty("cinemaId")
     private UUID CinemaId;
-    @JsonProperty("cinema")
-    private CinemaDTO cinema;
+    @JsonProperty("cinemaDTO")
+    private CinemaDTO cinemaDTO;
     @JsonProperty("movieId")
     private UUID MovieId;
-    @JsonProperty("movie")
-    private MovieDTO movie;
+    @JsonProperty("movieDTO")
+    private MovieDTO movieDTO;
     @JsonProperty("regionId")
     private UUID RegionId;
-    @JsonProperty("region")
-    private RegionDTO region;
+    @JsonProperty("regionDTO")
+    private RegionDTO regionDTO;
     @Column(name = "screeningSchedule")
     private String ScreeningSchedule;
 
     public CinemaMovieDTO(UUID id, UUID cinemaId, CinemaDTO cinema, UUID movieId, MovieDTO movie, UUID regionId, RegionDTO region, String screeningSchedule) {
         Id = id;
         CinemaId = cinemaId;
-        this.cinema = cinema;
+        this.cinemaDTO = cinema;
         MovieId = movieId;
-        this.movie = movie;
+        this.movieDTO = movie;
         RegionId = regionId;
-        this.region = region;
+        this.regionDTO = region;
         ScreeningSchedule = screeningSchedule;
     }
 
@@ -48,7 +48,7 @@ public class CinemaMovieDTO {
     }
 
     public CinemaDTO getCinema() {
-        return cinema;
+        return cinemaDTO;
     }
 
     public UUID getMovieId() {
@@ -56,7 +56,7 @@ public class CinemaMovieDTO {
     }
 
     public MovieDTO getMovie() {
-        return movie;
+        return movieDTO;
     }
 
     public UUID getRegionId() {
@@ -64,7 +64,7 @@ public class CinemaMovieDTO {
     }
 
     public RegionDTO getRegion() {
-        return region;
+        return regionDTO;
     }
 
     public String getScreeningSchedule() {

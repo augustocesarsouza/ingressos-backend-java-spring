@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -17,5 +18,5 @@ public interface MovieTheaterRepositoryJPA extends JpaRepository<MovieTheater, U
             "MovieTheater(mt.Id, null, null) " +
             "FROM MovieTheater AS mt " +
             "WHERE mt.MovieId = :movieId AND mt.RegionId = :regionId")
-    MovieTheater getMovieTheaterIfThereIs(UUID movieId, UUID regionId);
+    List<MovieTheater> getMovieTheaterIfThereIs(UUID movieId, UUID regionId);
 }

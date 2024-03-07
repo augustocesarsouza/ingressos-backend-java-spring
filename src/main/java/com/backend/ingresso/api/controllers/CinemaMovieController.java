@@ -18,6 +18,7 @@ import java.util.UUID;
 
 @Component
 @RestController
+@CrossOrigin
 @RequestMapping("/v1")
 public class CinemaMovieController {
     private final ICinemaMovieService cinemaMovieService;
@@ -27,7 +28,7 @@ public class CinemaMovieController {
         this.cinemaMovieService = cinemaMovieService;
     }
 
-    @GetMapping("/public/cinemaMovie/getAll/{region}/{movieId}")
+    @GetMapping("/cinemaMovie/getAll/{region}/{movieId}")
     public ResponseEntity<ResultService<List<CinemaMovieDTO>>> getAllMovieByRegionId(@PathVariable String region, @PathVariable String movieId){
         var result = cinemaMovieService.getByRegionCinemaIdAndMovieId(region, UUID.fromString(movieId));
 
@@ -38,7 +39,7 @@ public class CinemaMovieController {
         return ResponseEntity.badRequest().body(result);
     }
 
-    @PostMapping("/public/cinemaMovie/create")
+    @PostMapping("/cinemaMovie/create")
     public ResponseEntity<ResultService<CinemaMovieDTO>> create(@Valid @RequestBody CinemaMovieCreate cinemaMovieDTO, BindingResult resultValid){
         var result = cinemaMovieService.create(cinemaMovieDTO, resultValid);
 

@@ -19,7 +19,7 @@ public class MovieTheaterRepository implements IMovieTheaterRepository {
     }
 
     public MovieTheater getMovieTheaterIfThereIs(UUID movieId, UUID regionId){
-        return movieTheaterRepositoryJPA.getMovieTheaterIfThereIs(movieId, regionId);
+        return movieTheaterRepositoryJPA.getMovieTheaterIfThereIs(movieId, regionId).stream().findFirst().orElse(null);
     }
 
     public MovieTheater create(MovieTheater movieTheater){

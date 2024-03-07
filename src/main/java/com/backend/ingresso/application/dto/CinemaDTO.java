@@ -8,37 +8,37 @@ import java.util.UUID;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CinemaDTO {
     @JsonProperty("id")
-    private UUID Id;
+    private UUID id;
     @JsonProperty("nameCinema")
-    private String NameCinema;
+    private String nameCinema;
     @JsonProperty("district")
-    private String District;
+    private String district;
     @JsonProperty("ranking")
-    private String Ranking;
+    private String ranking;
 
     public CinemaDTO(UUID id, String nameCinema, String district, String ranking) {
-        Id = id;
-        NameCinema = nameCinema;
-        District = district;
-        Ranking = ranking;
+        this.id = id;
+        this.nameCinema = nameCinema;
+        this.district = district;
+        this.ranking = ranking;
     }
 
     public CinemaDTO() {
     }
 
     public UUID getId() {
-        return Id;
+        return id;
     }
 
     public String getNameCinema() {
-        return NameCinema;
+        return nameCinema;
     }
 
     public String getDistrict() {
-        return District;
+        return district;
     }
 
     public String getRanking() {
-        return Ranking;
+        return ranking;
     }
 }

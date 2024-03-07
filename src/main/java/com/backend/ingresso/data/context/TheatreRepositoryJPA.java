@@ -16,11 +16,11 @@ public interface TheatreRepositoryJPA extends JpaRepository<Theatre, UUID> {
     @Query("SELECT new com.backend.ingresso.domain.entities." +
             "Theatre(t.Id, t.Title, null, null, null, null, null, null, null) " +
             "FROM Theatre AS t WHERE t.Id = :theatreId")
-    Theatre getByTheatreId(UUID theatreId);
+    List<Theatre> getByTheatreId(UUID theatreId);
     @Query("SELECT new com.backend.ingresso.domain.entities." +
             "Theatre(t.Id, null, null, null, null, null, null, t.PublicId, null) " +
             "FROM Theatre AS t WHERE t.Id = :theatreId")
-    Theatre getByTheatreIdIdPublicId(UUID theatreId);
+    List<Theatre> getByTheatreIdIdPublicId(UUID theatreId);
     @Query("SELECT new com.backend.ingresso.application.dto." +
             "TheatreDTO(t.Id, t.Title, null, t.Data, t.Location, null, null, null, t.ImgUrl) " +
             "FROM Theatre AS t INNER JOIN RegionTheatre AS rt ON rt.TheatreId = t.Id WHERE rt.RegionId = :regionId")

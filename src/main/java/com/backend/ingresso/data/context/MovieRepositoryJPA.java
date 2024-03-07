@@ -16,22 +16,22 @@ public interface MovieRepositoryJPA extends JpaRepository<Movie, UUID> {
     @Query("SELECT new com.backend.ingresso.domain.entities." +
             "Movie(m.Id, m.Title, null, null, null, null, null, null, null, null, null) " +
             "FROM Movie AS m WHERE m.Id = :movieId")
-    Movie getMovieById_Info_Id_Title(UUID movieId);
+    List<Movie> getMovieById_Info_Id_Title(UUID movieId);
 
     @Query("SELECT new com.backend.ingresso.domain.entities." +
             "Movie(m.Id, m.Title, m.Description, m.Gender, m.Duration, m.MovieRating, m.ImgUrl, null, m.ImgUrlBackground, null, null) " +
             "FROM Movie AS m WHERE m.Id = :movieId")
-    Movie getMovieById(UUID movieId);
+    List<Movie> getMovieById(UUID movieId);
 
     @Query("SELECT new com.backend.ingresso.domain.entities." +
             "Movie(m.Id, m.Title, m.Description, m.Gender, null, m.MovieRating, null, null, null, null, null) " +
             "FROM Movie AS m WHERE m.StatusMovie = :statusMovie")
-    Movie getMovieByStatusMovie(String statusMovie);
+    List<Movie> getMovieByStatusMovie(String statusMovie);
 
     @Query("SELECT new com.backend.ingresso.domain.entities." +
             "Movie(m.Id, null, null, null, null, null, null, m.PublicId, null, m.PublicIdImgBackground, null) " +
             "FROM Movie AS m WHERE m.Id = :movieId")
-    Movie getMovieByIdForDelete(UUID movieId);
+    List<Movie> getMovieByIdForDelete(UUID movieId);
 
     @Query("SELECT new com.backend.ingresso.application.dto." +
             "MovieDTO(m.Id, m.Title, null, null, null, m.MovieRating, m.ImgUrl, null, null, null, null) " +
@@ -42,5 +42,5 @@ public interface MovieRepositoryJPA extends JpaRepository<Movie, UUID> {
             "Movie(m.Id, null, null, null, null, null, null, null, null, null, null) " +
             "FROM Movie AS m " +
             "WHERE m.Title = :title")
-    Movie getMovieByTitle(String title);
+    List<Movie> getMovieByTitle(String title);
 }
